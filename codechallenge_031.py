@@ -35,11 +35,10 @@ def test_random7():
 	assert rand7() <= 7
 
 def main():
-	nums = []
-	for i in range(6):
-		nums.append(rand7())
-	
-	print("Test1:\nGenerate 10 random numbers (1,..,7) using rand7:  {}\n".format(", ".join(str(i) for i in nums)))
+	nums = [rand7() for _ in range(6)]
+	print(
+		f'Test1:\nGenerate 10 random numbers (1,..,7) using rand7:  {", ".join(str(i) for i in nums)}\n'
+	)
 
 	print("Test2:\nRepeatedly generate numbers using rand7() until a 7 is procuded... ", end='')
 	while True:

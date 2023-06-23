@@ -67,7 +67,7 @@ class BSTNode:
 		# in-order traversal: left-root-right
 		if self.left:
 			self.left.print_tree()
-		print ("{} ".format(self.data), end=''),
+		(print(f"{self.data} ", end=''), )
 		if self.right:
 			self.right.print_tree()
 
@@ -117,8 +117,8 @@ def test_code():
 
 
 def run_test(root, testnum):
-	print("\nTest{}:\nGiven a binaray search tree having data:".format(testnum))
-	root.print_tree()	
+	print(f"\nTest{testnum}:\nGiven a binaray search tree having data:")
+	root.print_tree()
 	print("\nSecond largest value in the BST is:")
 	root.get_second_last_right()
 	
@@ -128,9 +128,9 @@ if __name__ == '__main__':
 	for num in values:
 		t1node.add(num)
 	print("Test1:\nGiven a binaray search tree having data:")
-	t1node.print_tree()	
+	t1node.print_tree()
 	data = list(t1node.tree_data())
-	print("\nSecond largest value in the BST is: {}".format(data[-2]))	
+	print(f"\nSecond largest value in the BST is: {data[-2]}")	
 
 	t2node = BSTNode(8)
 	values = [5,7,17,9,10,19]

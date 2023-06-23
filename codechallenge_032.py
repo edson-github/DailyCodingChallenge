@@ -31,10 +31,7 @@ from unittest.runner import TextTestResult
 #
 def isPalindrome(instr):
     rev_str = reversed(instr)  # the same as (slice/step) instr[::-1]
-    if list(instr) == list(rev_str):
-        return True
-    else:
-        return False
+    return list(instr) == list(rev_str)
 
 #
 # return all possible palindrome strings
@@ -63,10 +60,7 @@ def all_palindromes(instr):
 # Choose the longest palindrome
 #
 def longest_palindrome(plist=[]):
-    if len(plist) == 0:
-        return None
-    else:
-        return max(plist, key = len)
+    return None if len(plist) == 0 else max(plist, key = len)
 
 #
 # unittest
@@ -84,16 +78,16 @@ class Test_isPalindrome(unittest.TestCase):
 #
 def main():
     STRINGS = ["aabcdcb", "bananas", "google", "maddashcat", "roleimimi"]
-    
+
     for str in STRINGS:
-        print("Given '{}', the longest palindrome is '{}'".format(str, longest_palindrome(all_palindromes(str))))
+        print(
+            f"Given '{str}', the longest palindrome is '{longest_palindrome(all_palindromes(str))}'"
+        )
 
 
     STRINGS = ["aabcdcb", "bananas", "google", "maddashcat", "roleimimi"]
-    EXPECTED = ["bcdcb", "anana", "goog", "adda", "imimi"] 
-    PLINDS = []
-    for word in STRINGS:
-        PLINDS.append(longest_palindrome(all_palindromes(word)))
+    EXPECTED = ["bcdcb", "anana", "goog", "adda", "imimi"]
+    PLINDS = [longest_palindrome(all_palindromes(word)) for word in STRINGS]
     print(PLINDS)    
 
 if __name__ == '__main__':

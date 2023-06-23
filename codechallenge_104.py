@@ -64,12 +64,12 @@ def longest_absolute_path(input_string):
     tokens = input_string.split('\n')
 
     # 3.  Determine directory level by number of leading tabs
-    level = 0    
+    level = 0
     qualified_paths = []
     prev_is_a_file = False
     tcount = 0
     longest_path = []
-    
+
     print("\nTabCnt\tLevel\tisFile\tToken")
     print("=======\t=====\t=====\t=====")
     for token in tokens:
@@ -78,11 +78,11 @@ def longest_absolute_path(input_string):
             longest_path.append('/')
             level = 0
             prev_is_a_file = False
-            
+
             #print("TabCnt: {} token: {}".format(tcount, token))
         elif token.count('\t') > 0:
             tcount = token.count('\t', 0, len(token))
-            
+
             if tcount > level:
                 # is it a file or a directory?
                 if token.count('.', 0, len(token)) == 0:
@@ -97,23 +97,23 @@ def longest_absolute_path(input_string):
                     qualified_paths.append(''.join(longest_path))   # path could end in just a file
                     longest_path = longest_path[:-1]
                     prev_is_a_file = True
-                
+
             elif tcount == level:
                 longest_path.append(regexp.sub(r"[\n\t\s]*", "", token))
                 longest_path.append('/')
                 prev_is_a_file = False
-                
+
             else: # tcout <= level
                 #print("Back level detected: tcount:{} level:{}".format(tcount, level))
-                longest_path = longest_path[0:(tcount + 1)]
+                longest_path = longest_path[:tcount + 1]
                 longest_path.append(regexp.sub(r"[\n\t\s]*", "", token))
                 longest_path.append('/')
-                
-            level = tcount
-            
-        print("{}\t{}\t{}\t{}".format(tcount, level, prev_is_a_file, token))    
 
-    
+            level = tcount
+
+        print(f"{tcount}\t{level}\t{prev_is_a_file}\t{token}")    
+
+
     if __debug__:  # debug seems to be always ON
         # returning the number of characters in the longest path, and the longest path itself
         return len(max(qualified_paths, key=len)), max(qualified_paths, key=len)

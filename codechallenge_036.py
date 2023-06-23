@@ -72,7 +72,7 @@ class Queue:
 	def dequeue(self):
 		if self.outStack.isEmpty():
 			# pop item from bottom of inStack and push onto the top of outStack
-			for i in range(self.inStack.size()):
+			for _ in range(self.inStack.size()):
 				self.outStack.push(self.inStack.pop_at_end())
 
 		# get the top item of the outStack
@@ -99,16 +99,20 @@ def main():
 	items = ['I', 'am', 'groot']
 	[myQ.enqueue(item) for item in items]  # push all items onto the inStack
 
-	print("\nTest1:\nGiven items: [{}]\nEnqueue all items into a dual-stack queue then dequeue all will output (order FIFO):".format(', '.join(str(i) for i in items)))
-	for i in range(myQ.queue_size()):
+	print(
+		f"\nTest1:\nGiven items: [{', '.join(str(i) for i in items)}]\nEnqueue all items into a dual-stack queue then dequeue all will output (order FIFO):"
+	)
+	for _ in range(myQ.queue_size()):
 		print(myQ.dequeue())
 
 
 	items = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 	[myQ.enqueue(item) for item in items]  # push all items onto the inStack
 
-	print("\nTest2:\nGiven items: [{}]\nEnqueue all items into a dual-stack queue then dequeue all will output (order FIFO):".format(', '.join(str(i) for i in items)))
-	for i in range(myQ.queue_size()):
+	print(
+		f"\nTest2:\nGiven items: [{', '.join(str(i) for i in items)}]\nEnqueue all items into a dual-stack queue then dequeue all will output (order FIFO):"
+	)
+	for _ in range(myQ.queue_size()):
 		print(myQ.dequeue())
 
 	

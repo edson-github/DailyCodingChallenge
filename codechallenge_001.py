@@ -51,21 +51,17 @@ def isSumEqualK(nums, k):
 
 	nums.sort()
 	num = [n for n in nums if n < k]
-	for i in range(0, len(nums)):
-		# cheating it by iterate over range of nums in this if statement
-		if k - nums[i] in nums: 
-			return True
-	return False
+	return any(k - nums[i] in nums for i in range(0, len(nums)))
 
 # unittest func written for pytest module
 def test_BruteForceCode():
-	try:	
+	try:
 		start = time.time()
 		nums = [4,20,15,3,72,2,7,90,8,7,9,10,22]
 		k = 28
 		assert isSumOfK(nums,k) == True
 		end = time.time()
-		print("Elapsed time: {} mili-secs".format((end-start)*1000))
+		print(f"Elapsed time: {(end - start) * 1000} mili-secs")
 
 		nums = random.sample(range(1,1000),50)
 		k=nums[0]+nums[-1] #this ensure the test returns True
@@ -89,13 +85,13 @@ def test_BonusCode():
 		k = 28
 		assert isSumEqualK(nums, k) == True
 		end = time.time()
-		print("Elapsed time: {} mili-secs".format((end-start)*1000))
+		print(f"Elapsed time: {(end - start) * 1000} mili-secs")
 
 		k=nums[0]+nums[-1] #this ensures the test returns True
 		assert isSumEqualK(nums, k) == True
 	except AssertionError:
 		print("\tLogical condition tests failed on isSumEqualK()==True!")
-		
+
 	try:
 		k = 1000
 		assert isSumEqualK(nums, k) == False

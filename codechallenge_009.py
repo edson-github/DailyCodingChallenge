@@ -47,8 +47,7 @@ def deleteNode(head, value):
 	while currNode is not None:
 		if currNode.val == value:
 			if prevNode is None:
-				newHead = currNode.next
-				return newHead
+				return currNode.next
 			prevNode.next = currNode.next
 			return head
 		prevNode = currNode
@@ -108,7 +107,7 @@ if __name__ == "__main__":
 	insertNode(B, 10)
 	printNodes(B)
 
-	print("The intersected node on A and B is {}".format(getIntersectedNode(A,B)))
+	print(f"The intersected node on A and B is {getIntersectedNode(A, B)}")
 
 
 '''

@@ -15,7 +15,7 @@ for name in files:
 	full_path = os.path.join(path, name)
 	if os.path.isfile(full_path):
 		if len(name.split('.')) == 2 and name.split('.')[1] == 'py' and name != "tests.py":
-			print("Unittest commences for {}".format(full_path))
+			print(f"Unittest commences for {full_path}")
    			# Create result files which can be read by Jenkins or other Continuous integration server
 			pytest.main(['-v', '-s', '-m', 'not slow', '--junitxml=test_reports/test_results.xml', full_path])
 

@@ -32,10 +32,7 @@ Psuedo code:
 '''
 
 def cumulativeSum(sub_set):
-	if len(sub_set) == 0:
-		return 0
-	else:
-		return sub_set[0] + cumulativeSum(sub_set[1:])
+	return 0 if len(sub_set) == 0 else sub_set[0] + cumulativeSum(sub_set[1:])
 
 
 
@@ -52,15 +49,14 @@ def get_subset(S, k):
 	while len(S) >= 1:
 		for i in S:
 			if i > k:
-				S.remove(i)				
-			else:
-				if (sum_so_far + i) == k:
-					subset.append(i)
-					sum_so_far += i	
-					return subset
-				elif (sum_so_far + i) < k:
-					subset.append(i)
-					sum_so_far += i	
+				S.remove(i)
+			elif (sum_so_far + i) == k:
+				subset.append(i)
+				sum_so_far += i	
+				return subset
+			elif (sum_so_far + i) < k:
+				subset.append(i)
+				sum_so_far += i	
 
 	if sum_so_far > k:
 		return []
@@ -83,18 +79,20 @@ def main():
 	s_set = get_subset(S, k)
 
 	if len(s_set) > 0:
-		print("Test1:\nGiven a set of numbers: [{}] and a number k: {}.".format(\
-			', '.join(str(n) for n in S), k))
-		print("A subset that adds up to k is [{}]".format(' '.join(str(i) for i in s_set)))
-		print("i.e. sum(subset):{}.".format(cumulativeSum(s_set)))
+		print(
+			f"Test1:\nGiven a set of numbers: [{', '.join(str(n) for n in S)}] and a number k: {k}."
+		)
+		print(f"A subset that adds up to k is [{' '.join(str(i) for i in s_set)}]")
+		print(f"i.e. sum(subset):{cumulativeSum(s_set)}.")
 
 	k = 100
 	s_set = get_subset(S, k)
 	if len(s_set) > 0:
-		print("\nTest2:\nGiven a set of numbers: [{}] and a number k: {}.".format(\
-			', '.join(str(n) for n in S), k))
-		print("A subset that adds up to k is [{}]".format(' '.join(str(i) for i in s_set)))
-		print("i.e. sum(subset):{}.".format(cumulativeSum(s_set)))
+		print(
+			f"\nTest2:\nGiven a set of numbers: [{', '.join(str(n) for n in S)}] and a number k: {k}."
+		)
+		print(f"A subset that adds up to k is [{' '.join(str(i) for i in s_set)}]")
+		print(f"i.e. sum(subset):{cumulativeSum(s_set)}.")
 
 if __name__ == '__main__':
 	main()

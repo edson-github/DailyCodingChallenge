@@ -40,11 +40,10 @@ Pseudo code:
 def culmulative_sum(arr=[]):
     if len(arr) == 0:
         return 0
-    else:
-        cur_sum = arr[0]
-        for i in arr[1:]:
-            cur_sum += i
-        return cur_sum
+    cur_sum = arr[0]
+    for i in arr[1:]:
+        cur_sum += i
+    return cur_sum
 
 #
 # Feed each sub array into the cumulative_sum function 
@@ -57,14 +56,12 @@ def highest_sum(arr=[]):
     sum_so_far = 0
 
     while start < end-1:
-        subarr = arr[start:j] 
-        print("DBUG--(sub array): {}".format(subarr))
+        subarr = arr[start:j]
+        print(f"DBUG--(sub array): {subarr}")
         j-=1
 
         new_sum = culmulative_sum(subarr)
-        if sum_so_far < int(new_sum):
-            sum_so_far = int(new_sum)
-
+        sum_so_far = max(sum_so_far, int(new_sum))
         if j<start+2:
             start+=1
             j=end
@@ -86,11 +83,11 @@ def test_highest_sum():
 #
 def main():
     A = [34, -50, 42, 14, -5, 86]
-    print("\n\nTest1:\nGiven an array of [{}]".format(', '.join(str(i) for i in A)))
-    print("The largest sum of its contiguous subarrays is {}".format(highest_sum(A)))
+    print(f"\n\nTest1:\nGiven an array of [{', '.join(str(i) for i in A)}]")
+    print(f"The largest sum of its contiguous subarrays is {highest_sum(A)}")
     A = [-5, -1, -8, -9]
-    print("\n\nTest2:\nGiven an array of [{}]".format(', '.join(str(i) for i in A)))
-    print("The largest sum of its contiguous subarrays is {}".format(highest_sum(A)))
+    print(f"\n\nTest2:\nGiven an array of [{', '.join(str(i) for i in A)}]")
+    print(f"The largest sum of its contiguous subarrays is {highest_sum(A)}")
 
 if __name__ == '__main__':
     main()

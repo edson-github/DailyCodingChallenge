@@ -98,25 +98,27 @@ def inversionRatio(USCurrencyEquivalent={}):
 
 def gainArbitrage(USCurrencyEquivalent, AmountUSD):
 
-    inversionHash = inversionRatio(USCurrencyEquivalent)
+	inversionHash = inversionRatio(USCurrencyEquivalent)
 
-    # step1
-    maxrate = max([inversionHash[k] for k in inversionHash])
-    XAmount = AmountUSD/maxrate
-    XCurrencyName = [k for k,v in inversionHash.items() if v == maxrate]
-    print("Step1: Trade {} USD for {} {}".format(AmountUSD, XAmount, str(XCurrencyName[0])))
+	    # step1
+	maxrate = max(inversionHash[k] for k in inversionHash)
+	XAmount = AmountUSD/maxrate
+	XCurrencyName = [k for k,v in inversionHash.items() if v == maxrate]
+	print(f"Step1: Trade {AmountUSD} USD for {XAmount} {str(XCurrencyName[0])}")
 
-    # step2
-    minrate = min([inversionHash[k] for k in inversionHash])
-    YAmount = XAmount/minrate	
-    YCurrencyName = [k for k,v in inversionHash.items() if v == minrate]
-    print("Step2: Trade {} {} for {} {}".format(XAmount, str(XCurrencyName[0]), YAmount, str(YCurrencyName[0])))
+	    # step2
+	minrate = min(inversionHash[k] for k in inversionHash)
+	YAmount = XAmount/minrate
+	YCurrencyName = [k for k,v in inversionHash.items() if v == minrate]
+	print(
+		f"Step2: Trade {XAmount} {str(XCurrencyName[0])} for {YAmount} {str(YCurrencyName[0])}"
+	)
 
-    # step3
-    ZAmount = AmountUSD + AmountUSD *(minrate/maxrate)
-    print("Step3: Trade {} {} back to {} USD".format(YAmount, str(YCurrencyName[0]), ZAmount)) 
+	# step3
+	ZAmount = AmountUSD + AmountUSD *(minrate/maxrate)
+	print(f"Step3: Trade {YAmount} {str(YCurrencyName[0])} back to {ZAmount} USD") 
 
-    return AmountUSD * (minrate/maxrate)
+	return AmountUSD * (minrate/maxrate)
 
 class TestArbitrage(unittest.TestCase):
     def test_code(self):
@@ -136,22 +138,24 @@ class TestArbitrage(unittest.TestCase):
 
 if __name__ == '__main__':
     
-    Amount = 1000000 # US dollars
-    USCurrencyEquivalent = {
-                "Euro": 0.870903,
-                "British Pound": 0.783992,
-                "Indian Rupee": 69.605725,
-                "Australian Dollar": 1.420549,
-                "Canadian Dollar": 1.363172,
-                "Singapore Dollar": 1.362844,
-                "Swiss Franc": 0.983397,
-                "Malaysian Ringgit": 4.132583,
-                "Japanese Yen": 109.558545,
-                "Chinese Renminbi": 6.874934
-                }
-    print("Gain from arbitrage trades: {} USD".format(gainArbitrage(USCurrencyEquivalent, Amount)))
+	Amount = 1000000 # US dollars
+	USCurrencyEquivalent = {
+	            "Euro": 0.870903,
+	            "British Pound": 0.783992,
+	            "Indian Rupee": 69.605725,
+	            "Australian Dollar": 1.420549,
+	            "Canadian Dollar": 1.363172,
+	            "Singapore Dollar": 1.362844,
+	            "Swiss Franc": 0.983397,
+	            "Malaysian Ringgit": 4.132583,
+	            "Japanese Yen": 109.558545,
+	            "Chinese Renminbi": 6.874934
+	            }
+	print(
+		f"Gain from arbitrage trades: {gainArbitrage(USCurrencyEquivalent, Amount)} USD"
+	)
 
-    unittest.main()
+	unittest.main()
 
 '''
 Run-time output:

@@ -27,24 +27,18 @@ Can we write roman numerals in unconvetional way? eg. IIIVIII ==> 3 - 8 = 5
 
 '''
 class solution:
-    def romanToInt(s):
+    def romanToInt(self):
         roman_dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
         int_val = 0
         # Roman numurals are written from largest to smallest.
         # So, let's traverse the string from right to left.
-        for i in range(len(s) -1, -1, -1):
-            print('i: {} roman: {} Intval: {}'.format( i, s[i], roman_dict[s[i]]))
-            val = roman_dict[s[i]]
-            
+        for i in range(len(self) - 1, -1, -1):
+            print(f'i: {i} roman: {self[i]} Intval: {roman_dict[self[i]]}')
+            val = roman_dict[self[i]]
+
             # no more than three of the same symbol in a row.
             # e.g. IV, IX, etc.  III is less than V and IX is less than X, etc.
-            if 3 * val <= int_val:
-                # case of subtracting a smaller value from a larger value
-                int_val = int_val - val
-            else:
-                # case of adding a larger value to a smaller value
-                int_val = int_val + val
-                
+            int_val = int_val - val if 3 * val <= int_val else int_val + val
         return int_val
 
     if __name__ == '__main__':

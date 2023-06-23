@@ -43,29 +43,25 @@ class solution:
         if len(self.string1) == len(self.string2) == 0:
             self.result = False
             return
-        
+
         # Get the frequency of each character in string1
         for char in self.string1:
             if char in self.freq1:
                 self.freq1[char] += 1
             else:
                 self.freq1[char] = 1
-        print("freq1: {}".format(self.freq1))
-        
+        print(f"freq1: {self.freq1}")
+
         # Get the frequency of each character in string2        
         for char in self.string2:
             if char in self.freq2:
                 self.freq2[char] += 1
             else:
                 self.freq2[char] = 1
-        print("freq2: {}".format(self.freq2))        
-        
-        # Compare the frequencies of each string        
-        if self.freq1 == self.freq2:
-            self.result = True
-        else:
-            self.result = False
-            
+        print(f"freq2: {self.freq2}")        
+
+        # Compare the frequencies of each string
+        self.result = self.freq1 == self.freq2
         return self.result
     
     def get_result(self):
@@ -88,17 +84,27 @@ class TestSolution(unittest.TestCase):
 def main(self):
     print("Running solution...\nTRUE CASES:")
     ana = solution('abcd', 'dcba');
-    print("String1: '{}' and String2: '{}' are anagram? {}".format(ana.string1, ana.string2, ana.get_result()));
+    print(
+        f"String1: '{ana.string1}' and String2: '{ana.string2}' are anagram? {ana.get_result()}"
+    );
     ana = solution('nameless', 'salesmen');
-    print("String1: '{}' and String2: '{}' are anagram? {}".format(ana.string1, ana.string2, ana.get_result()));
-    
+    print(
+        f"String1: '{ana.string1}' and String2: '{ana.string2}' are anagram? {ana.get_result()}"
+    );
+
     print("\nFALSE CASES:")
     ana = solution('abcd', '12345');
-    print("String1: '{}' and String2: '{}' are anagram? {}".format(ana.string1, ana.string2, ana.get_result()));
+    print(
+        f"String1: '{ana.string1}' and String2: '{ana.string2}' are anagram? {ana.get_result()}"
+    );
     ana = solution('', 'hey')
-    print("String1: '{}' and String2: '{}' are anagram? {}".format(ana.string1, ana.string2, ana.get_result()));
+    print(
+        f"String1: '{ana.string1}' and String2: '{ana.string2}' are anagram? {ana.get_result()}"
+    );
     ana = solution('', '')
-    print("String1: '{}' and String2: '{}' are anagram? {}".format(ana.string1, ana.string2, ana.get_result()));
+    print(
+        f"String1: '{ana.string1}' and String2: '{ana.string2}' are anagram? {ana.get_result()}"
+    );
     print('Done')
     
 if __name__ == '__main__':

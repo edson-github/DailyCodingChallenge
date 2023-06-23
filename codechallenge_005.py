@@ -88,7 +88,7 @@ class LinkedList:
 		print(' -> '.join(retstr))
 
 	def revprintNode(self):
-		retstr = list()
+		retstr = []
 		curr = self.head
 		while curr:
 			retstr.append(str(curr.data))
@@ -97,7 +97,7 @@ class LinkedList:
 		print(' -> '.join(retstr))			
 
 	def getNodes(self):
-		ret = list()
+		ret = []
 		curr = self.head
 		while curr:
 			ret.append(curr.data)
@@ -206,10 +206,10 @@ if __name__ == "__main__":
 	print("---------------")
 
 	starttime = time.time()
-	RET = addDigitsInLinkedLists(A,B) 
+	RET = addDigitsInLinkedLists(A,B)
 	endtime = time.time()
 	RET.printNode()
-	print("Elasped time = {}\n".format(endtime - starttime))
+	print(f"Elasped time = {endtime - starttime}\n")
 
 	lk1 = deque([2,5,5])
 	lk2 = deque([2,5,3])
@@ -218,12 +218,12 @@ if __name__ == "__main__":
 	print(' -> '.join([str(k) for k in list(lk2)]))
 	print("----------------")
 	starttime = time.time()
-	RET = addLinkedList(lk1, lk2) 
+	RET = addLinkedList(lk1, lk2)
 	endtime = time.time()
 	RET.reverse()
 	Str=[str(n) for n in list(RET)]
 	print(' -> '.join(Str))
-	print("Elasped time = {}".format(endtime - starttime))
+	print(f"Elasped time = {endtime - starttime}")
 
 
 '''

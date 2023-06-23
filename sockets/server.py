@@ -7,12 +7,12 @@ port = 43210 # Reserve a port for your service.
 serverSock.bind((host, port)) # Bind to the port
 
 serverSock.listen(5) # Now wait for client connection.
-print('Server %s ' % host, end=' ')
+print(f'Server {host} ', end=' ')
 print('is listening on port %d' % port)
 
-while (True):
+while True:
     connection, addr = serverSock.accept() # Establish connection with client.
-    print("Got connection from %s", str(addr))
+    print("Got connection from %s", addr)
     from_client = ''
     while True:
         data = connection.recv(1024)

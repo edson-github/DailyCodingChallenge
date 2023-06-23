@@ -7,6 +7,7 @@ Challenge description:
 Controlling the browser with the Selenium module.
 
 '''
+
 from selenium import webdriver
 
 browser = webdriver.Chrome()
@@ -20,7 +21,7 @@ try:
     elem = browser.find_elements_by_link_text('DailyCodingChallenge')
     type(elem)
     elem.click()
-    print('Found <%s> element with the text "DailyCodingChallenge"' % (elem.tag_name))
+    print(f'Found <{elem.tag_name}> element with the text "DailyCodingChallenge"')
 except Exception as e:
     print(e)
     browser.quit()

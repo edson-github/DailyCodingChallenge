@@ -70,15 +70,11 @@ class Solution():
                 
     # return a key with the highest value
     def get_max(self):
-        if (len(self.d) == 0):        
-            return None
-        return max(self.d, key=self.d.get)
+        return None if (len(self.d) == 0) else max(self.d, key=self.d.get)
     
     # return a key with the lowest value
     def get_min(self):
-        if (len(self.d) == 0):
-            return None
-        return min(self.d, key=self.d.get)
+        return None if (len(self.d) == 0) else min(self.d, key=self.d.get)
     
     # return a list of keys
     def get_all(self):
@@ -131,10 +127,10 @@ def run_dev_tests():
     testD.plus(1)
     testD.plus(2)
     testD.plus(3)
-    testD.plus(3)    
+    testD.plus(3)
     all = testD.get_all()
     for key,value in enumerate(all):
-        print("Key: {} -- Value: {}".format(key,value))       
+        print(f"Key: {key} -- Value: {value}")       
 
     print(testD.get_max())
     print(testD.get_min())
@@ -142,44 +138,44 @@ def run_dev_tests():
 def main():
     # add some keys to the dictionary
     D = Solution()
-    
+
     for i in range(10):
         D.plus(i)
     for i in range(4,9):
-        D.plus(i)  
+        D.plus(i)
     for i in range(3,10):
-        D.plus(i)   
+        D.plus(i)
     for i in range(8,10):
         D.plus(i)   
-                   
+
     # check all
     all = D.get_all()
     for key,value in enumerate(all):
-        print("Key: {} -- Value: {}".format(key,value))
-        
-  
-    
-    # get the highest and lowest value
-    print("Key with max value: {}".format(D.get_max()))
-    print("Key with min value: {}".format(D.get_min()))
+        print(f"Key: {key} -- Value: {value}")
+                
+          
 
-    
+    # get the highest and lowest value
+    print(f"Key with max value: {D.get_max()}")
+    print(f"Key with min value: {D.get_min()}")
+
+
     # minus a non-existing key
     D.minus(10)
-    
+
     # check all
     all = D.get_all()
     for key,value in enumerate(all):
-        print("Key: {} -- Value: {}".format(key,value))    
-    
+        print(f"Key: {key} -- Value: {value}")    
+
     # reverse the process.  expecting none to be returned
     print("Reversing the process...")
     for i in range(10):
         D.minus(i)
     for i in range(4,9):
-        D.minus(i)  
+        D.minus(i)
     for i in range(3,10):
-        D.minus(i)   
+        D.minus(i)
     for i in range(8,10):
         D.minus(i)
 
@@ -187,7 +183,7 @@ def main():
     print("Now, expect None to be returned.:")
     all = D.get_all()
     for key,value in enumerate(all):
-        print("Key: {} -- Value: {}".format(key,value))  
+        print(f"Key: {key} -- Value: {value}")
     print(D.get_max())  
         
 if __name__ == '__main__':

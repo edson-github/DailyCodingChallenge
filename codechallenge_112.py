@@ -48,12 +48,12 @@ import numpy as np
 
 def bruteforce(sentence, k):
     rows = k
-    sentence = 'thisisazigzag' 
+    sentence = 'thisisazigzag'
     cols = len(sentence)
-    
+
     # define a 2D array
-    X = [['' for x in range(cols)] for y in range(rows)] 
-    
+    X = [['' for _ in range(cols)] for _ in range(rows)] 
+
     X[0][0] = sentence[0]
     X[0][6] = sentence[6]
     X[0][12] = sentence[12]
@@ -82,7 +82,7 @@ def smarterAlgo(sentence, k):
     cols = len(sentence)
     chars = list(sentence)
     X = np.zeros((rows, cols), dtype='U1')
-    np.fill_diagonal(X, chars[0:k], wrap=False)
+    np.fill_diagonal(X, chars[:k], wrap=False)
     X[1,5] = 's'
     X[2,4] = 'i'
     col = np.arange(k)
@@ -95,20 +95,20 @@ def zigZagNp(sentence, k):
     # base case
     if k == 0:
         return
- 
+
     # base case
     if k == 1:
         print(sentence, end='')
         return sentence
- 
+
     # define 2D array
     Result = np.zeros((k,len(sentence)), dtype='U1')
- 
+
     # print first row
     row=[]
     last_i=1
     for i in range(0, len(sentence), (k - 1) * 2):
-        [row.append(' ') for x in range(last_i, i)]
+        [row.append(' ') for _ in range(last_i, i)]
         row.append(sentence[i])
         last_i = i + 1
 
@@ -117,7 +117,7 @@ def zigZagNp(sentence, k):
     n_Result = np.delete(Result, 1, 0)
     Result = n_Result
     # print(Result)
-    
+
     # print middle rows
     last_i=0
     row = []
@@ -126,37 +126,33 @@ def zigZagNp(sentence, k):
         i = j
 
         while i < len(sentence):
-            [row.append(' ') for x in range(last_i, i)]
+            [row.append(' ') for _ in range(last_i, i)]
             row.append(sentence[i])
             # print('i is: ',i)
             last_i=i+1
-            
-            if down:            # going down
-                i += (k - j - 1) * 2
-            else:               # going up
-                i += (k - 1) * 2 - (k - j - 1) * 2
-        
+
+            i += (k - j - 1) * 2 if down else (k - 1) * 2 - (k - j - 1) * 2
             down = not down     # switch direction
 
-        [row.append(' ') for x in range(last_i, len(sentence))]
+        [row.append(' ') for _ in range(last_i, len(sentence))]
         # print(row)
         row_n = Result.shape[0] ##last row
         Result = np.insert(Result,row_n,[row],axis= 0)
         n_Result = np.delete(Result, 1, 0)
         Result = n_Result
         # print(Result)
-            
+
         last_i = 0
         row = []
-        
+
     # print last row
     for i in range(k - 1, len(sentence), (k - 1) * 2):
-        [row.append(' ') for x in range(last_i, i)]
+        [row.append(' ') for _ in range(last_i, i)]
         row.append(sentence[i])
         last_i=i+1
-    [row.append(' ') for x in range(last_i, len(sentence))]        
- 
- 
+    [row.append(' ') for _ in range(last_i, len(sentence))]        
+     
+
     row_n = Result.shape[0] ##last row
     Result = np.insert(Result,row_n,[row],axis= 0)
     n_Result = np.delete(Result, 0, 0)

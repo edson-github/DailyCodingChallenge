@@ -55,30 +55,34 @@ def test_inversion_count():
 
 def main():
 	arr = [2, 4, 1, 3, 5]
-	print("Test1:\nGiven array: [{}]".format(', '.join(str(s) for s in arr)))
+	print(f"Test1:\nGiven array: [{', '.join(str(s) for s in arr)}]")
 	s_time = time.time()
-	print("The inversion count is {}".format(bruteforce_inversion_count(arr)))
+	print(f"The inversion count is {bruteforce_inversion_count(arr)}")
 	e_time = time.time()
-	print("(slow method) Elapsed time: {} secs".format((e_time - s_time)*1000))
+	print(f"(slow method) Elapsed time: {(e_time - s_time) * 1000} secs")
 
-	print("\nTest2:\nGiven array: [{}]".format(', '.join(str(s) for s in arr)))
+	print(f"\nTest2:\nGiven array: [{', '.join(str(s) for s in arr)}]")
 	s_time = time.time()
-	print("The inversion count is {}".format(fast_inversion_count(arr)))
+	print(f"The inversion count is {fast_inversion_count(arr)}")
 	e_time = time.time()
-	print("(list_comprehension method) Elapsed time: {} secs".format((e_time - s_time)*1000))
+	print(
+		f"(list_comprehension method) Elapsed time: {(e_time - s_time) * 1000} secs"
+	)
 
 	arr = [5,4,3,2,1]
-	print("\nTest3:\nGiven array: [{}]".format(', '.join(str(s) for s in arr)))
+	print(f"\nTest3:\nGiven array: [{', '.join(str(s) for s in arr)}]")
 	s_time = time.time()
-	print("The inversion count is {}".format(bruteforce_inversion_count(arr)))
+	print(f"The inversion count is {bruteforce_inversion_count(arr)}")
 	e_time = time.time()
-	print("(slow method) Elapsed time: {} secs".format((e_time - s_time)*1000))
+	print(f"(slow method) Elapsed time: {(e_time - s_time) * 1000} secs")
 
-	print("\nTest4:\nGiven array: [{}]".format(', '.join(str(s) for s in arr)))
+	print(f"\nTest4:\nGiven array: [{', '.join(str(s) for s in arr)}]")
 	s_time = time.time()
-	print("The inversion count is {}".format(fast_inversion_count(arr)))
+	print(f"The inversion count is {fast_inversion_count(arr)}")
 	e_time = time.time()
-	print("(list_comprehension method) Elapsed time: {} secs".format((e_time - s_time)*1000))
+	print(
+		f"(list_comprehension method) Elapsed time: {(e_time - s_time) * 1000} secs"
+	)
 
 if __name__ == '__main__':
 	main()

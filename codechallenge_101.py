@@ -48,12 +48,12 @@ def shorthandFind2Numbers(arr, k):
 if __name__ == '__main__':
     arr = [10, 15, 3, 7]
     k = 17
-    print("\nTest#1 (findTwoNumbers): arr={}, k={}".format(arr, k))
-    print(findTwoNumbers( arr, k ))  
+    print(f"\nTest#1 (findTwoNumbers): arr={arr}, k={k}")
+    print(findTwoNumbers( arr, k ))
     arr = [4,7,12,9,33]
     k = 21
-    print("\nTest#2 (findTwoNumbers): arr={}, k={}".format(arr, k))
+    print(f"\nTest#2 (findTwoNumbers): arr={arr}, k={k}")
     print(findTwoNumbers( arr, k ))
 
-    print("\nTest#3 (shorthandFind2Numbers): arr={}, k={}".format(arr, k))
+    print(f"\nTest#3 (shorthandFind2Numbers): arr={arr}, k={k}")
     shorthandFind2Numbers( arr, k )

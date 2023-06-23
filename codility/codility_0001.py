@@ -30,20 +30,17 @@ Pseudo code:
 from __future__ import print_function
 def solution(N):
 	b = bin(N)[2:]
-	for i in range(len(b)):
+	for _ in range(len(b)):
 		if b[0]=='0': b=b[1:]
-		if b[-1]=='0': b=b[:len(b)-1]
-	if b.count('1') > 2:
-		gap_cnt=0
-		temp_b = b.split('1')
-		for i in temp_b:
-			if gap_cnt < len(i):
-				gap_cnt = len(i)
-		
-		return gap_cnt
-	else:
-			
+		if b[-1]=='0':
+			b = b[:-1]
+	if b.count('1') <= 2:
 		return b.count('0')
+	gap_cnt=0
+	temp_b = b.split('1')
+	for i in temp_b:
+		gap_cnt = max(gap_cnt, len(i))
+	return gap_cnt
 
 def test_solution():
 	N = [1, 5, 101, 2147488647]
@@ -57,7 +54,7 @@ def test_solution():
 def main():
 	A = [1,6,1401,39,55]
 	B = []
-	print("Test1:\nGiven number N in {}".format(', '.join(str(i) for i in A)))
+	print(f"Test1:\nGiven number N in {', '.join(str(i) for i in A)}")
 	print("The binary gaps are: ", end='')
 	[B.append(solution(i)) for i in A]
 	print(', '.join(str(g) for g in B))

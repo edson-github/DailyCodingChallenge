@@ -29,7 +29,7 @@ Note:  This is why I love Python!!!
 def find_non_dup(A=[]):
 	if len(A) == 0:
 		return None
-	non_dup = list(set([x for x in A if A.count(x) == 1]))
+	non_dup = list({x for x in A if A.count(x) == 1})
 	return non_dup[-1]
 
 def test_code():
@@ -39,7 +39,9 @@ def test_code():
 if __name__ == '__main__':
 	Array = [9,5,5,5,8,9,8,9,3,4,4,4]
 	non_dup = find_non_dup(Array)
-	print("Test1:\nGiven a list [{}]\nThe non-duplicate value is {}".format(', '.join(str(i) for i in Array), non_dup))
+	print(
+		f"Test1:\nGiven a list [{', '.join(str(i) for i in Array)}]\nThe non-duplicate value is {non_dup}"
+	)
 
 '''
 Run-time output:

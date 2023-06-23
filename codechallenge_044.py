@@ -48,7 +48,7 @@ def maxprod(F=[]):
 			try:
 				prd = np.cumprod(F[idx:idx+3])[-1]
 			except IndexError:
-				prd = np.cumprod(F[len(F)-1:] + F[0:2])[-1]
+				prd = np.cumprod(F[-1:] + F[:2])[-1]
 			if prd > maxp:
 				maxp = prd
 			idx+=1
@@ -72,13 +72,19 @@ def test_maxprod():
 #
 def main():
 	Arr = [-10,-10,5,2]
-	print("\nTest1:\nGiven a list of numbers: {}\nThe maximum cumulative product of any three numbers is {}.".format(np.array(Arr), maxprod(Arr)))
+	print(
+		f"\nTest1:\nGiven a list of numbers: {np.array(Arr)}\nThe maximum cumulative product of any three numbers is {maxprod(Arr)}."
+	)
 
 	Arr = [12,4,22,9,5,7,6]
-	print("\nTest2:\nGiven a list of numbers: {}\nThe maximum cumulative product of any three numbers is {}.".format(np.array(Arr), maxprod(Arr)))
+	print(
+		f"\nTest2:\nGiven a list of numbers: {np.array(Arr)}\nThe maximum cumulative product of any three numbers is {maxprod(Arr)}."
+	)
 
 	Arr = np.random.random(10)
-	print("\nTest3:\nGiven a list of numbers: {}\nThe maximum cumulative product of any three numbers is {}.".format(np.array(Arr), maxprod(Arr)))
+	print(
+		f"\nTest3:\nGiven a list of numbers: {np.array(Arr)}\nThe maximum cumulative product of any three numbers is {maxprod(Arr)}."
+	)
 
 if __name__ == '__main__':
 	main()
