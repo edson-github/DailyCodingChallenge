@@ -34,6 +34,7 @@ def prodArray(a):
 	if len(a) == 0:
 		return p
 
+	pro=1
 	# have data, let's go
 	for i in range(len(a)):
 		prod=1
@@ -44,7 +45,6 @@ def prodArray(a):
 			#print("i={} x={} n={} prod={}".format(i,x,a[x], prod))
 		#print(prod)
 		p.append(prod)
-		pro=1
 	print(p)
 	return p
 

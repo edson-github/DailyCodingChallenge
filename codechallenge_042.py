@@ -122,11 +122,11 @@ def main():
            [25,26,27,28,29,30,31,32],
            [33,34,35,36,37,38,39,40]]
     print(Arr)
-    quadrants = list()
-    
+    quadrants = []
+
     #quadrants = forward_elems(Arr) + downward_elems(Arr) + backward_elems(Arr)
     #quadrants = forward_elems(Arr)
-    quadrants = downward_elems(Arr) 
+    quadrants = downward_elems(Arr)
     #quadrants = backward_elems(Arr)
     quadrants.sort()
     print(quadrants)

@@ -22,8 +22,8 @@ def validate_ipV4_address(address):
         if int(part) < 0 or int(part) > 255:
             #print("IP address {} is not valid".format(address))
             return False
- 
-    print("IP address {} is valid".format(address))
+
+    print(f"IP address {address} is valid")
     return True
 
 
@@ -38,52 +38,51 @@ def validate_ipV4_address(address):
 #  of ports to check.
 #
 def get_open_ports(target, port_range, desc = False):
-  open_ports = []
-  
-  desc_results = ""
-  
-  if validate_ipV4_address(target):
-    # hmm, is it an URL
-    desc_results += "Open ports for {}\n".format(target)
-  else:
-    try:
-      IP = socket.gethostbyname(target);
-      print("Target {} is ({})".format(target, IP))
-      desc_results += "Open ports for {} ({})\n".format(target, IP)
-    except:
-      return "Error: Invalid IP address"
+    open_ports = []
 
-  desc_results += "{}     {}\n".format("PORT", "SERVICE")
-  
-  client_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-  
-  for p in range(port_range[0], port_range[1]):
-    try:
-      print("Connecting {}, port {} ...".format(target, p))
-      # client_sock.settimeout(10.0)
-      client_sock.connect((target, p))
-      if desc:
+    desc_results = ""
+
+    if validate_ipV4_address(target):
+            # hmm, is it an URL
+        desc_results += f"Open ports for {target}\n"
+    else:
         try:
-          if ports_and_services[p] != None:
-            print(p, '->', ports_and_services[p])
-            desc_results += "{}     {}\n".format(target, ports_and_services[p])
-        except KeyError:
-          #print("Key does not exist in common_ports")
-          pass
-      else:
-        open_ports.append(p)      
-      
-      # client_sock.settimeout(None)
-      client_sock.close()
-    except:
-      client_sock.close()
-      # pass
-      
-  if desc:
+            IP = socket.gethostbyname(target);
+            print(f"Target {target} is ({IP})")
+            desc_results += f"Open ports for {target} ({IP})\n"
+        except:
+          return "Error: Invalid IP address"
+
+    desc_results += f"PORT     SERVICE\n"
+
+    client_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    for p in range(port_range[0], port_range[1]):
+        try:
+            print(f"Connecting {target}, port {p} ...")
+            # client_sock.settimeout(10.0)
+            client_sock.connect((target, p))
+            if desc:
+                try:
+                    if ports_and_services[p] != None:
+                        print(p, '->', ports_and_services[p])
+                        desc_results += f"{target}     {ports_and_services[p]}\n"
+                except KeyError:
+                  #print("Key does not exist in common_ports")
+                  pass
+            else:
+                open_ports.append(p)      
+
+            # client_sock.settimeout(None)
+            client_sock.close()
+        except:
+          client_sock.close()
+          # pass
+
+    if not desc:
+        return(open_ports)
     print(desc_results)
     return desc_results
-  else:
-    return(open_ports)
 
 # if '__name__' == '__main__':
 #print(get_open_ports("www.stackoverflow.com", [79, 443], True))

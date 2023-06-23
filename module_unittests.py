@@ -34,8 +34,7 @@ class TestCodeChallenges(unittest.TestCase):
 	def test_codeChallenge004(self):
 		missing = 13
 		A = list(range(-20, missing))
-		A.append(missing+2)
-		A.append(missing+20)
+		A.extend((missing+2, missing+20))
 		self.assertEqual(codechallenge_004.findFirstMissing(A), missing)
 
 	def test_codChallenge005(self):
@@ -83,9 +82,11 @@ class TestCodeChallenges(unittest.TestCase):
 
 		# test using random generator
 		schedtimeX = codechallenge_008.genRandomSchedule(100)
-		print("Random generated schedule: {}".format(schedtimeX))
+		print(f"Random generated schedule: {schedtimeX}")
 		try:
-			print ("Number of required room(s): {}".format(codechallenge_008.reservedRooms(schedtimeX)))
+			print(
+				f"Number of required room(s): {codechallenge_008.reservedRooms(schedtimeX)}"
+			)
 		except RuntimeError:
 			#with self.assertRaises(RuntimeError): 
 			#dictionary changed size during iteration

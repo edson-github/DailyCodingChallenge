@@ -107,12 +107,11 @@ def build_huffman_code(Hdict):
                 
 
 def insert_huffman_tree(root, key, value):
-    list(key)
-    if root is None:
-        root = Node(value)
-    else:
-        if key == '0':
-            root.left = Node(value)
+	list(key)
+	if root is None:
+		root = Node(value)
+	elif key == '0':
+		root.left = Node(value)
     
 
 # utility function to print huffman
@@ -173,14 +172,13 @@ def build_huffman_tree(Hdict):
     printNodes(hNodes[0])
     
 def insert(root, val, key):
-    if root is None:
-        return Node(key)
-    else:
-        if root.val == '1':
-            root.right = insert(root.right, key)
-        elif root.val == '0':
-            root.left = insert(root.left, key)
-    return root
+	if root is None:
+		return Node(key)
+	if root.val == '1':
+	    root.right = insert(root.right, key)
+	elif root.val == '0':
+	    root.left = insert(root.left, key)
+	return root
 
 #
 # build Huffman tree using binarytree library
@@ -213,46 +211,39 @@ def test_cats():
     
 def main():
     
-    # characters for huffman tree
-    chars = ['a', 'b', 'c', 'd', 'e', 'f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+	# characters for huffman tree
+	chars = ['a', 'b', 'c', 'd', 'e', 'f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
-    # frequency of characters
-    freq = [5,9,12,13,16,45,48,51,55,62,66,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190]
+	# frequency of characters
+	freq = [5,9,12,13,16,45,48,51,55,62,66,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190]
 
-    # list containing unused nodes
-    nodes = []
+	nodes = [node(freq[x], chars[x]) for x in range(len(chars))]
+	while len(nodes) > 1:
+	    # sort all the nodes in ascending order
+	    # based on their frequency
+	    nodes = sorted(nodes, key=lambda x: x.freq)
 
-    # converting characters and frequencies
-    # into huffman tree nodes
-    for x in range(len(chars)):
-        nodes.append(node(freq[x], chars[x]))
+	    # pick 2 smallest nodes
+	    left = nodes[0]
+	    right = nodes[1]
 
-    while len(nodes) > 1:
-        # sort all the nodes in ascending order
-        # based on their frequency
-        nodes = sorted(nodes, key=lambda x: x.freq)
+	    # assign directional value to these nodes
+	    left.huff = 0
+	    right.huff = 1
 
-        # pick 2 smallest nodes
-        left = nodes[0]
-        right = nodes[1]
+	    # combine the 2 smallest nodes to create
+	    # new node as their parent
+	    newNode = node(left.freq+right.freq, left.symbol+right.symbol, left, right)
 
-        # assign directional value to these nodes
-        left.huff = 0
-        right.huff = 1
+	    # remove the 2 nodes and add their
+	    # parent as new node among others
+	    nodes.remove(left)
+	    nodes.remove(right)
+	    nodes.append(newNode)
 
-        # combine the 2 smallest nodes to create
-        # new node as their parent
-        newNode = node(left.freq+right.freq, left.symbol+right.symbol, left, right)
-
-        # remove the 2 nodes and add their
-        # parent as new node among others
-        nodes.remove(left)
-        nodes.remove(right)
-        nodes.append(newNode)
-
-    # Huffman Tree is ready!
-    printNodes(nodes[0])
-    print()
+	# Huffman Tree is ready!
+	printNodes(nodes[0])
+	print()
 
 
 if __name__ == '__main__':

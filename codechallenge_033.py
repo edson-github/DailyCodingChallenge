@@ -77,11 +77,13 @@ def profit(price_list=[]):
 		all_profits.append(gain)
 
 	# verbish
-	if len(all_profits) > 0:
-		print("For maximum profit we buy at {} and sell at {} for the profit of {}.".format(buyPrice, sellPrice, max(all_profits)))
+	if all_profits:
+		print(
+			f"For maximum profit we buy at {buyPrice} and sell at {sellPrice} for the profit of {max(all_profits)}."
+		)
 	else:
 		print("We bought at {}, We haven't sold it yet.  Price is still equaled or lower than the invested capital.".format(buyPrice, profit=0))
-	
+
 	# return profit
 	return int(max(all_profits))
 
@@ -98,11 +100,15 @@ def test_profit():
 #
 def main():
 	stock_prices = [9, 11, 8, 5, 7, 10]
-	print("Test1:\nGiven progressing stock prices {}".format('->'.join(str(i) for i in stock_prices)))
+	print(
+		f"Test1:\nGiven progressing stock prices {'->'.join(str(i) for i in stock_prices)}"
+	)
 	profit(stock_prices)
 
 	stock_prices = [157 , 160, 99, 88, 77, 66, 66, 66]
-	print("Test2:\nGiven progressing stock prices {}".format('->'.join(str(i) for i in stock_prices)))
+	print(
+		f"Test2:\nGiven progressing stock prices {'->'.join(str(i) for i in stock_prices)}"
+	)
 	profit(stock_prices)
 
 if __name__ == '__main__':

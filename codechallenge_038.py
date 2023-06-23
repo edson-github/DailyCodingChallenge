@@ -52,10 +52,10 @@ def gen_subString(instr, k):
 		if len(tempstr.strip()) > k:
 			yield tempstr.rstrip(last_str).strip()
 			substrlst.insert(0, last_str)
-			tempstr = ""
 		else:
-			yield tempstr.strip()
-			tempstr = ""		
+			yield tempstr.strip()		
+
+		tempstr = ""		
 
 #
 # return array of subsrings having length <= k
@@ -67,7 +67,7 @@ def scrape_string(instr, k):
 		return None
 
 	iter_str = gen_subString(instr, k)
-	return [item for item in iter_str]
+	return list(iter_str)
 
 
 
@@ -81,9 +81,9 @@ def test_clipped_strs():
 	expected_str = ['Penny Lane', 'is in my', 'ears and in', 'my eyes']
 	assert scrape_string(str, k) == expected_str
 	k = len(str)+1000
-	assert scrape_string(str, k) == None
+	assert scrape_string(str, k) is None
 	str = ""
-	assert scrape_string(str, k) == None
+	assert scrape_string(str, k) is None
 
 
 #
@@ -92,17 +92,23 @@ def test_clipped_strs():
 def main():
 	str = "The not so smart fox jumped over the fence into the pond"
 	k = 10
-	print("Test1:\nGiven a string '{}' and k={}\nThe spliced string array with each element having length less than or equal to k is".format(str, k))
+	print(
+		f"Test1:\nGiven a string '{str}' and k={k}\nThe spliced string array with each element having length less than or equal to k is"
+	)
 	print(scrape_string(str, k))
 
 	str = "Penny Lane is in my ears and in my eyes"
 	k = 11
-	print("\nTest2:\nGiven a string '{}' and k={}\nThe spliced string array with each element having length less than or equal to k is".format(str, k))
+	print(
+		f"\nTest2:\nGiven a string '{str}' and k={k}\nThe spliced string array with each element having length less than or equal to k is"
+	)
 	print(scrape_string(str, k))
 
 	str = "Mary has a little lamb"
 	k = len(str)
-	print("\nTest3:\nGiven a string '{}' and k={}\nThe spliced string array with each element having length less than or equal to k is".format(str, k))
+	print(
+		f"\nTest3:\nGiven a string '{str}' and k={k}\nThe spliced string array with each element having length less than or equal to k is"
+	)
 	print(scrape_string(str, k))
 
 if __name__ == '__main__':

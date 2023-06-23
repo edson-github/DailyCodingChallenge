@@ -48,17 +48,8 @@ def findWord(wordsList, wordString):
 		if word in wordString:
 			pos = wordString.find(word)  #index position of begining match
 
-			if lastpos > 0:
-				if dictRetString[lastpos] in word:
-					# strip out any value a substring of another in the list
-					# i.e. strip out 'bedbath' in ['bed', 'bedbath', 'bath', 'and', 'beyond']
-					pass
-				else:
-					dictRetString[int(pos)] = str(word)
-			else:
-				# first match word, take it.
+			if lastpos <= 0 or dictRetString[lastpos] not in word:
 				dictRetString[int(pos)] = str(word)
-
 			lastpos = pos
 
 	# sort the keys 
@@ -83,17 +74,17 @@ def test_code():
 
 
 if __name__ == "__main__":
-	wList =[ 'quick', 'brown', 'the', 'fox' ] 
+	wList =[ 'quick', 'brown', 'the', 'fox' ]
 	wStr = "thequickbrownfox"
 	expected = ['the', 'quick', 'brown', 'fox']
-	print("Given\nA word list: {} and a string: {}".format(wList, wStr))
-	print("Words reconstruction: {}\n".format(findWord(wList, wStr)))
+	print(f"Given\nA word list: {wList} and a string: {wStr}")
+	print(f"Words reconstruction: {findWord(wList, wStr)}\n")
 
-	words = ['bed', 'bath', 'bedbath', 'and', 'beyond'] 
+	words = ['bed', 'bath', 'bedbath', 'and', 'beyond']
 	string = "bedbathandbeyond"
-	expected = ['bed', 'bath', 'and', 'beyond'] 
-	print("Given\nA word list: {} and a string: {}".format(words, string))
-	print("Words reconstruction: {}\n".format(findWord(words, string)))
+	expected = ['bed', 'bath', 'and', 'beyond']
+	print(f"Given\nA word list: {words} and a string: {string}")
+	print(f"Words reconstruction: {findWord(words, string)}\n")
 
 
 '''

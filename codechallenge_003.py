@@ -95,28 +95,24 @@ def deserialize(s):
 	do_deserialize(arr) 
 
 def do_deserialize(arr):
-	if len(arr) > 0:
-		val = arr.pop()
-		
+	if len(arr) <= 0:
+		return
+	val = arr.pop()
+
 		# base case
-		if val == 'root':
-			# create a new node as the root node
-			node = Node('root', None, None)	    	
-		else:
-			node = Node(arr)
-
+	node = Node('root', None, None) if val == 'root' else Node(arr)
 	    # add root
-		node.val = val
+	node.val = val
 
-		# add left 
-		node.left = do_deserialize(arr)
+	# add left 
+	node.left = do_deserialize(arr)
 
-		# add right 
-		node.right = do_deserialize(arr)
+	# add right 
+	node.right = do_deserialize(arr)
 
-		# go up the node
-		print(type(node))
-		return node
+	# go up the node
+	print(type(node))
+	return node
 
 
 

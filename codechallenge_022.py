@@ -51,14 +51,7 @@ def iterlist(s1):
 # retrieve a list 
 #
 def powerlist(s1):
-	if len(s1) == 0:
-		return None
-
-	powerset = []
-	for i in iterlist(s1):
-		powerset.append(i)
-
-	return powerset
+	return None if len(s1) == 0 else list(iterlist(s1))
 
 
 #

@@ -47,26 +47,24 @@ class Node:
                 self.m_color = j
                 self.m_cost = cost_fn[self.m_curr_index][self.m_color]
                 self.m_children_nodes[self.m_color] = Node(self.m_num_homes, \
-                        self.m_num_colors, \
-                        self.m_curr_index+1, \
-                        self.m_color, \
-                        self.m_total_cost_so_far + self.m_cost, \
-                        self.m_debug_list_colors_homes_so_far + [self.m_color])
+                            self.m_num_colors, \
+                            self.m_curr_index+1, \
+                            self.m_color, \
+                            self.m_total_cost_so_far + self.m_cost, \
+                            self.m_debug_list_colors_homes_so_far + [self.m_color])
 
         else:
             # subsequent houses, two colors remained
             for q in range(self.m_num_colors):
-                if q == self.m_prev_color:
-                    pass
-                else:
+                if q != self.m_prev_color:
                     self.m_color = q
                     self.m_cost = cost_fn[self.m_curr_index][self.m_color]
                     self.m_children_nodes[self.m_color] = Node(self.m_num_homes, \
-                          self.m_num_colors, \
-                          self.m_curr_index+1, \
-                          self.m_color, \
-                          self.m_total_cost_so_far + self.m_cost, \
-                          self.m_debug_list_colors_homes_so_far + [self.m_color])
+                              self.m_num_colors, \
+                              self.m_curr_index+1, \
+                              self.m_color, \
+                              self.m_total_cost_so_far + self.m_cost, \
+                              self.m_debug_list_colors_homes_so_far + [self.m_color])
 
         # build the cost tree:
         for key in self.m_children_nodes:
@@ -122,8 +120,9 @@ cost_fn = [
         [7, 8, 1]   # i = 4
         ]
 '''
+
 # generate a random matrix of cost
-cost_fn = [[int(10*random.random()) for i in range(k)] for j in range(n)]
+cost_fn = [[int(10*random.random()) for _ in range(k)] for _ in range(n)]
 
 colors_of_homes_and_total_cost = {} # each entry is stringified colors of all homes and total cost
 
@@ -134,17 +133,19 @@ print("Number of ways of painting n=5 houses", root.print_cost_homes())
 
 min_cost_colors = ''
 min_cost = math.pow(2,30)
-for mkey in colors_of_homes_and_total_cost:
-    if colors_of_homes_and_total_cost[mkey] < min_cost:
+for mkey, value in colors_of_homes_and_total_cost.items():
+    if value < min_cost:
         min_cost = colors_of_homes_and_total_cost[mkey]
         min_cost_colors = mkey
 
-print('Min cost of {} is achieved by coloring houses this way {}'.format(min_cost, min_cost_colors))
+print(
+    f'Min cost of {min_cost} is achieved by coloring houses this way {min_cost_colors}'
+)
 print("Where,")
 for color in min_cost_colors.split('_'):
     coulor = switcher.get(color)
     tmpstr = ';'.join(coulor)
-    print("\tcolor code: {} color: {}".format(color, coulor))
+    print(f"\tcolor code: {color} color: {coulor}")
 
 '''
 Run-time output:

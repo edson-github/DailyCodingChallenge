@@ -63,8 +63,8 @@ def test_code():
 if __name__ == '__main__':
 	strA = 'kitten'
 	strB = 'sitting'
-	print("Given\nstring1: {}\nstring2: {}".format(strA, strB))
-	print("The distance between two strings: {}".format(strDistSubstitution(strA, strB)))			
+	print(f"Given\nstring1: {strA}\nstring2: {strB}")
+	print(f"The distance between two strings: {strDistSubstitution(strA, strB)}")			
 
 '''
 Run-time output:

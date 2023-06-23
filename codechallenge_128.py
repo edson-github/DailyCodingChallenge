@@ -60,16 +60,20 @@ class Solution():
 def main():
     ra = [ 2.53, 5.78, 10.44]
     ratios = Solution().gearRatio(ra)
-    print("Given three gears with respective radius: {}".format(ra))
-    print("Chaining ratio is {}".format(ratios[0]))
+    print(f"Given three gears with respective radius: {ra}")
+    print(f"Chaining ratio is {ratios[0]}")
     for key in ratios[1]:
-        print('\tGear ratio with respect to the first gear is 1 to {}'.format(round(ratios[1][key],2)))
+        print(
+            f'\tGear ratio with respect to the first gear is 1 to {round(ratios[1][key], 2)}'
+        )
 
-    print("Again, straight ratios:") 
+    print("Again, straight ratios:")
     ratios = Solution().straightRatio(ra)
-    print("The chaining ratio is {}".format(ratios[0]))
+    print(f"The chaining ratio is {ratios[0]}")
     for key in ratios[1]:
-        print('\tGear ratio with respect to the first gear is 1 to {}'.format(round(ratios[1][key],2)))
+        print(
+            f'\tGear ratio with respect to the first gear is 1 to {round(ratios[1][key], 2)}'
+        )
 
 if __name__ == "__main__":
     main()   

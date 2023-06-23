@@ -78,24 +78,38 @@ def main():
     numbers = [2,3,5,7,11,15]
     target = 9
     print("Test case #0:(calling list comprehension method)")
-    print("numbers = [2,3,5,7,11,15], target = 9 and expected result = {}".format(sum_two_numbers(numbers, target)))
+    print(
+        f"numbers = [2,3,5,7,11,15], target = 9 and expected result = {sum_two_numbers(numbers, target)}"
+    )
     numbers = [2,7,11,15]
     print("\nTest case #1:")
-    print("Given a 1-indexed sorted in non-decreasing order array of integers numbers {} and target = {}".format(numbers, target))
-    print("The indices of two numbers that add up to a target number: {}".format(sum2numbers(numbers, target)))
-    
+    print(
+        f"Given a 1-indexed sorted in non-decreasing order array of integers numbers {numbers} and target = {target}"
+    )
+    print(
+        f"The indices of two numbers that add up to a target number: {sum2numbers(numbers, target)}"
+    )
+
     print("\nTest case #2:")
-    numbers = [2,3,4] 
+    numbers = [2,3,4]
     target = 6
-    print("Given a 1-indexed sorted in non-decreasing order array of integers numbers {} and target = {}".format(numbers, target))
-    print("The indices of two numbers that add up to a target number: {}".format(sum2numbers(numbers, target)))
-    
+    print(
+        f"Given a 1-indexed sorted in non-decreasing order array of integers numbers {numbers} and target = {target}"
+    )
+    print(
+        f"The indices of two numbers that add up to a target number: {sum2numbers(numbers, target)}"
+    )
+
     print("\nTest case #3:")
-    numbers = [-1,0] 
+    numbers = [-1,0]
     target = -1
-    print("Given a 1-indexed sorted in non-decreasing order array of integers numbers {} and target = {}".format(numbers, target))
-    print("The indices of two numbers that add up to a target number: {}".format(sum2numbers(numbers, target)))
-    
+    print(
+        f"Given a 1-indexed sorted in non-decreasing order array of integers numbers {numbers} and target = {target}"
+    )
+    print(
+        f"The indices of two numbers that add up to a target number: {sum2numbers(numbers, target)}"
+    )
+
     print("\n\n")
 
 

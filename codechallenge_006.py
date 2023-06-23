@@ -42,21 +42,20 @@ def maxValInArray(arr, k):
 	if k == 1:
 		#print( arr )
 		return arr
-	else:
-		subarr = list()
-		listofmax = list()
+	subarr = []
+	listofmax = []
 
-		while (len(arr) >= k):
-			x = 0
-			for x in range(x, (k+x)):
-				subarr.append(arr[x])
-			#listofmax.append(sorted(subarr, reverse=True)[:1])
-			listofmax.append(max(subarr))
-			subarr = []
-			arr.pop(0)
+	while (len(arr) >= k):
+		x = 0
+		for x in range(x, (k+x)):
+			subarr.append(arr[x])
+		#listofmax.append(sorted(subarr, reverse=True)[:1])
+		listofmax.append(max(subarr))
+		subarr = []
+		arr.pop(0)
 
-		#print (listofmax)
-		return listofmax
+	#print (listofmax)
+	return listofmax
 			
 
 #
@@ -70,14 +69,13 @@ def maxValsList(arr, k):
 	if k == 1:
 		#print( arr )
 		return arr
-	else:
-		retarr = list()
-		while len(arr) >= k:
+	retarr = []
+	while len(arr) >= k:
 			#print(max([a[i] for i in range(k)]))
-			retarr.append(max([arr[i] for i in range(k)]))
-			arr.pop(0)
+		retarr.append(max(arr[i] for i in range(k)))
+		arr.pop(0)
 
-		return retarr
+	return retarr
 
 
 def test_code():
@@ -95,18 +93,18 @@ if __name__ == "__main__":
 	A = [10, 5, 2, 7, 8, 7]
 	K = 3
 
-	print ("Original array: {}".format(A))
+	print(f"Original array: {A}")
 	starttime = time.time()
-	print( maxValInArray(A, K)) 
+	print( maxValInArray(A, K))
 	endtime = time.time()
-	print("Elapsed time in brute force methob: {} secs".format(endtime - starttime))
+	print(f"Elapsed time in brute force methob: {endtime - starttime} secs")
 
 	A = [10, 5, 2, 7, 8, 7]
 	starttime = time.time()
 	print( maxValsList(A, K))
 	endtime = time.time()
-	print("Elapsed time in O(n) method: {} secs".format(endtime - starttime))
-	
+	print(f"Elapsed time in O(n) method: {endtime - starttime} secs")
+		
 
 '''
 Run-time output:

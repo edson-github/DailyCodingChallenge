@@ -63,14 +63,9 @@ from unittest.runner import TextTestResult
 # O(n) complexity
 #
 def isDescendingSorted(lst):
-    # Check for Descending Sorted List
-    flag = False
     test_list1 = lst[:]
     test_list1.sort(reverse = True)
-    if (test_list1 == lst):
-        flag = True
-        
-    return flag   
+    return test_list1 == lst   
 
 
 
@@ -130,9 +125,9 @@ class TestSmallestUnorderedWindow(unittest.TestCase):
         Slst = [1,2,3,4,5,6,7,8,9]
         assert findSmallestUnsortedWindow(Slst) == (0,0)
         Slst = []
-        assert findSmallestUnsortedWindow(Slst) == None
+        assert findSmallestUnsortedWindow(Slst) is None
         Slst = [12]
-        assert findSmallestUnsortedWindow(Slst) == None
+        assert findSmallestUnsortedWindow(Slst) is None
         time.sleep(1)
                     
     def test_SmallWindow(self):

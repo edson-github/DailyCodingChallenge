@@ -43,7 +43,7 @@ def isSub_able(R1, L2, halfTotal):
 		l_total += l_elem
 		#print("DBUG-- r_elem:{} l_elem:{}".format(r_elem, l_elem))
 		if l_total == halfTotal or r_total == halfTotal:
-			print("DBUG-- R_Total:{} L_Total:{} Half:{}".format(r_total, l_total, halfTotal))
+			print(f"DBUG-- R_Total:{r_total} L_Total:{l_total} Half:{halfTotal}")
 			return True
 	return False
 
@@ -86,16 +86,16 @@ def test_sublisting():
 #
 def main():
 	myMSet = [15, 5, 20, 10, 35, 15, 10]
-	print("\nTest1:\nGiven multiset {}".format(myMSet))
-	print("Can it be broken into subsets?: {}".format(get_sublist(myMSet)))
+	print(f"\nTest1:\nGiven multiset {myMSet}")
+	print(f"Can it be broken into subsets?: {get_sublist(myMSet)}")
 
 	myMSet = [15, 5, 20, 10, 35]
-	print("\nTest2:\nGiven multiset {}".format(myMSet))
-	print("Can it be broken into subsets?: {}".format(get_sublist(myMSet)))
+	print(f"\nTest2:\nGiven multiset {myMSet}")
+	print(f"Can it be broken into subsets?: {get_sublist(myMSet)}")
 
 	myMSet = []
-	print("\nTest3:\nGiven multiset {}".format(myMSet))
-	print("Can it be broken into subsets?: {}".format(get_sublist(myMSet)))
+	print(f"\nTest3:\nGiven multiset {myMSet}")
+	print(f"Can it be broken into subsets?: {get_sublist(myMSet)}")
 
 if __name__ == '__main__':
 	main()

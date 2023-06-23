@@ -104,11 +104,8 @@ def decimalIP_to_BinaryIP(decimalIP):
     # strip the decimal IP address to get the four octets
     octets = decimalIP.split('.')
     binaryOctets = [decimal_to_binary(int(octet)) for octet in octets]
-    binaryIP = []
-    for oct in binaryOctets:
-        binaryIP.append(oct)
-        
-    return "{}.{}.{}.{}".format(binaryIP[0], binaryIP[1], binaryIP[2], binaryIP[3])
+    binaryIP = list(binaryOctets)
+    return f"{binaryIP[0]}.{binaryIP[1]}.{binaryIP[2]}.{binaryIP[3]}"
     
 
 def decimalIP_to_HexIP(decimalIP):
@@ -118,20 +115,16 @@ def decimalIP_to_HexIP(decimalIP):
     binaryOctets = [decimal_to_binary(int(octet)) for octet in octets]
     for oct in binaryOctets:
         # convert each 4-bit binary octet to hexadecimal
-        hexVal = hex(int(oct[0:4], 2))[2:] + hex(int(oct[4:8], 2))[2:]
+        hexVal = hex(int(oct[:4], 2))[2:] + hex(int(oct[4:8], 2))[2:]
         hexVals.append(hexVal)
-        
-    return str("{}.{}.{}.{}".format(hexVals[0], hexVals[1], hexVals[2], hexVals[3])).upper()
+
+    return f"{hexVals[0]}.{hexVals[1]}.{hexVals[2]}.{hexVals[3]}".upper()
 
 def hexIP_to_DecimalIP(hexIP):
     # strip the hex IP address to get the four octets
     octets = hexIP.split('.')
-    decimalOctets = []
-    for oct in octets:
-        # convert each 2-character hexadecimal octet to decimal
-        decimalOctets.append(int(oct[0:2], 16) * 16 + int(oct[2:4], 16))
-        
-    return "{}.{}.{}.{}".format(decimalOctets[0], decimalOctets[1], decimalOctets[2], decimalOctets[3])
+    decimalOctets = [int(oct[:2], 16) * 16 + int(oct[2:4], 16) for oct in octets]
+    return f"{decimalOctets[0]}.{decimalOctets[1]}.{decimalOctets[2]}.{decimalOctets[3]}"
 
 
 class TestCodeChallenge105(unittest.TestCase):
@@ -153,23 +146,27 @@ class TestCodeChallenge105(unittest.TestCase):
         
 if __name__ == '__main__':
     print(type(os.environ.get('UNITTEST_ONLY')), type('True'))
-    
+
     if os.environ.get('UNITTEST_ONLY') != 'True':
         IPAddress = '192.145.19.234'
-        print("IP address: {} is {} in binary".format(IPAddress, decimalIP_to_BinaryIP(IPAddress)))
-        print("IP address: {} is {} in hex".format(IPAddress, decimalIP_to_HexIP(IPAddress)))
+        print(
+            f"IP address: {IPAddress} is {decimalIP_to_BinaryIP(IPAddress)} in binary"
+        )
+        print(f"IP address: {IPAddress} is {decimalIP_to_HexIP(IPAddress)} in hex")
         IPAddress = '192.168.100.22'
-        print("IP address: {} is {} in binary".format(IPAddress, decimalIP_to_BinaryIP(IPAddress)))
-        print("IP address: {} is {} in hex".format(IPAddress, decimalIP_to_HexIP(IPAddress)))
+        print(
+            f"IP address: {IPAddress} is {decimalIP_to_BinaryIP(IPAddress)} in binary"
+        )
+        print(f"IP address: {IPAddress} is {decimalIP_to_HexIP(IPAddress)} in hex")
         IPAddress = 'C0.A8.64.16'
-        print("IP address: {} is {} in decimal".format(IPAddress, hexIP_to_DecimalIP(IPAddress)))
+        print(f"IP address: {IPAddress} is {hexIP_to_DecimalIP(IPAddress)} in decimal")
     else:
         suite = unittest.TestLoader().loadTestsFromTestCase(TestCodeChallenge105)
         unittest.TextTestRunner(verbosity=0).run(suite)
         # read the htlm output path from environment variable. e.g. local .env file.
         html_report_path = os.environ['HTML_REPORT_PATH']
         testRunner=HtmlTestRunner.HTMLTestRunner(output=html_report_path, report_title='Test Report for codechallenge_105.py')
-        
+
         test_suite = unittest.TestSuite()
         all_test = unittest.makeSuite(TestCodeChallenge105)
         test_suite.addTest(all_test)

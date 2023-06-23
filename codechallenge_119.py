@@ -74,14 +74,14 @@ def main():
     str1 = 'hurricanemark'
     str2 = 'kramenacirruh'
     print("Case 1: (Even number of characters in string)")
-    print("\tGiven a string: '{}' its reverse: '{}'".format(str1, reverse_string(str1)))
-    print("\tGiven a string: '{}', its reverse: '{}'".format(str2, reverse(str2)))
+    print(f"\tGiven a string: '{str1}' its reverse: '{reverse_string(str1)}'")
+    print(f"\tGiven a string: '{str2}', its reverse: '{reverse(str2)}'")
 
     str1 = 'Emily'
     str2 = 'ylimE'
     print("Case 2: (Odd number of characters in string)")
-    print("\tGiven a string: '{}' its reverse: '{}'".format(str1, reverse_string(str1)))
-    print("\tGiven a string: '{}', its reverse: '{}'".format(str2, reverse(str2)))
+    print(f"\tGiven a string: '{str1}' its reverse: '{reverse_string(str1)}'")
+    print(f"\tGiven a string: '{str2}', its reverse: '{reverse(str2)}'")
     
 if __name__ == '__main__':
     if os.environ.get('UNITTEST_ONLY') == 'True':

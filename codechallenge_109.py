@@ -66,8 +66,7 @@ def fib_w_goldenratio(n):
 # given a large starting value, compute the next k values in the fibonacci sequence
 #
 def fib_next_k(start_val, k):
-    k_vals = []
-    k_vals.append(fib_w_goldenratio(start_val))
+    k_vals = [fib_w_goldenratio(start_val)]
     [k_vals.append(fib_w_goldenratio(k_vals[i])) for i in range(k)]
     return k_vals
         

@@ -92,7 +92,7 @@ def getLastRecord(head):
 def generate_order_id(n):
     range_start = 10**(n-1)
     range_end = (10**n)-1
-    return 'O-{}'.format(random.randint(range_start, range_end))  
+    return f'O-{random.randint(range_start, range_end)}'  
 
 #
 # Unit test:
@@ -129,7 +129,7 @@ class TestOrderLog(unittest.TestCase):
         
 def test_SinlglyLinkedList():
     order_log = SlRecord()
-    for i in range(1000):
+    for _ in range(1000):
         order_log = addRecord(order_log, generate_order_id(10))
     print("Unit test (Singly linked list):")
     print("\tRecordID at Idx#3:" , getRecord(order_log, 3))
@@ -137,16 +137,14 @@ def test_SinlglyLinkedList():
     
 def test_Queue():
     order_log = collections.deque()
-    for i in range(1000):
+    for _ in range(1000):
         order_log.append(generate_order_id(10))
     print("Unit test (Queue):")
     print("\tRecordID at Idx#500:" , order_log[500])
     print("\tLast recordID: ", order_log.pop())
 
 def test_Stack():
-    sLog = []
-    for i in range(1000):
-        sLog.append(generate_order_id(10))
+    sLog = [generate_order_id(10) for _ in range(1000)]
     print("Unit test (Stack):")
     print("\tLast recordID: ", sLog[-1])
 
@@ -162,42 +160,26 @@ if __name__ == '__main__':
     if os.environ.get('UNITTEST_ONLY') != 'True':
         # non-unit tests
         slLog = SlRecord()
-        for i in range(10):
+        for _ in range(10):
             slLog = addRecord(slLog, generate_order_id(50))
         print("Test#1 (Singly linked list):")
         print("\t", getLastRecord(slLog))
-        
+
         # dequeue:
         qLog = collections.deque()
-        for i in range(10):
+        for _ in range(10):
             qLog.append(generate_order_id(50))
         print("Test#2 (Queue):")
         print("\t", qLog[-1])
-        
-        # stack:
-        sLog = []
-        for i in range(10):
-            sLog.append(generate_order_id(50))
+
+        sLog = [generate_order_id(50) for _ in range(10)]
         print("Test#3 (Stack):")
         print("\t", sLog[-1])
         print()
-        
+
     else:
         unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='test_reports'))
 
-        #  # read the htlm output path from environment variable. e.g. local .env file.
-        # html_report_path = os.environ['HTML_REPORT_PATH']
-        # testRunner=HtmlTestRunner.HTMLTestRunner(output=html_report_path, report_title='Test Report for codechallenge_103.py')
-        # test_suite = unittest.TestSuite()
-        # unittest.TextTestRunner(verbosity=0).run(test_suite)
-        
-        # all_test = unittest.makeSuite(TestOrderLog)
-        # test_suite.addTest(all_test)
-        # test_suite.addTest(TestOrderLog("test_Stack")) 
-        # test_suite.addTest(TestOrderLog("test_Queue"))
-        # unittest.main(testRunner.run(test_suite)) 
-
-         
 '''
 Run-time output:
 ===============

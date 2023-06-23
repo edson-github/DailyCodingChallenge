@@ -136,19 +136,9 @@ def getPalindrome(instr):
 		# deal with the offset index
 
 		startidx, endidx = idxOfRepeatedChars(str(instr))
-		#print("DBUG: instr:{} startidx:{} endidx:{}".format(instr, startidx, endidx))			
-		# iterate from middle toward edge 
-		# e.g.
-		# 0  1  2  3  4  5
-		# g  o  o  g  l  e
-		# startidx:1, endidx:2
-		count = 1
-		for i in range(endidx+1, len(instr)+1, 1):
-			if instr[i] == instr[startidx - count]:
-				pass
-			else:
-				instr = instr[:0] + instr[i] + instr[0:]
-			count+=1
+		for count, i in enumerate(range(endidx+1, len(instr)+1, 1), start=1):
+			if instr[i] != instr[startidx - count]:
+				instr = instr[:0] + instr[i] + instr[:]
 	else: # remaining cases such as word 'race'
 		halfidx = len(instr)//2
 
@@ -156,10 +146,10 @@ def getPalindrome(instr):
 		# e.g.
 		# from 0 .. halfidx
 		flipchars = list(instr)
-		flipchars.reverse() 
+		flipchars.reverse()
 		flipchars.pop()
 		flipstr = ''.join(flipchars)
-		instr = instr[:0] + flipstr + instr[0:]
+		instr = instr[:0] + flipstr + instr[:]
 
 
 	#print(instr)
@@ -178,28 +168,36 @@ def test_palindrome():
 #
 if __name__ == '__main__':
 	A='google'
-	print("Test1:\nInput: {}".format(A))
+	print(f"Test1:\nInput: {A}")
 	PalindStr = getPalindrome(A)
-	print("Output: {}".format(PalindStr))
-	print("Validate palindrome string: \'{}\' as {}.".format(PalindStr, isValidPalindrome(PalindStr)))
+	print(f"Output: {PalindStr}")
+	print(
+		f"Validate palindrome string: \'{PalindStr}\' as {isValidPalindrome(PalindStr)}."
+	)
 
 	A='race'
-	print("\nTest2:\nInput: {}".format(A))
+	print(f"\nTest2:\nInput: {A}")
 	PalindStr = getPalindrome(A)
-	print("Output: {}".format(PalindStr))
-	print("Validate palindrome string: \'{}\' as {}.".format(PalindStr, isValidPalindrome(PalindStr)))
+	print(f"Output: {PalindStr}")
+	print(
+		f"Validate palindrome string: \'{PalindStr}\' as {isValidPalindrome(PalindStr)}."
+	)
 
 	A='ABBA'
-	print("\nTest3:\nInput: {}".format(A))
+	print(f"\nTest3:\nInput: {A}")
 	PalindStr = getPalindrome(A)
-	print("Output: {}".format(PalindStr))
-	print("Validate palindrome string: \'{}\' as {}.".format(PalindStr, isValidPalindrome(PalindStr)))
+	print(f"Output: {PalindStr}")
+	print(
+		f"Validate palindrome string: \'{PalindStr}\' as {isValidPalindrome(PalindStr)}."
+	)
 
 	A='bananas'
-	print("\nTest3:\nInput: {}".format(A))
+	print(f"\nTest3:\nInput: {A}")
 	PalindStr = getPalindrome(A)
-	print("Output: {}".format(PalindStr))
-	print("Validate palindrome string: \'{}\' as {}.".format(PalindStr, isValidPalindrome(PalindStr)))
+	print(f"Output: {PalindStr}")
+	print(
+		f"Validate palindrome string: \'{PalindStr}\' as {isValidPalindrome(PalindStr)}."
+	)
 '''
 Run-time output:
 ================

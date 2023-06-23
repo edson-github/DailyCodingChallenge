@@ -84,8 +84,8 @@ class Solution():
             return False
         # find max value in list and make it the height.  split array in half using this marker.
         max_value = max(histogram)
-        print('Maximum value: {} Index: {}'.format(max_value, histogram.index(max_value)))
-        
+        print(f'Maximum value: {max_value} Index: {histogram.index(max_value)}')
+
         # split the list into two halves
         h1 = histogram[:(histogram.index(max_value))]
         h2 = histogram[histogram.index(max_value) + 1:]
@@ -94,9 +94,9 @@ class Solution():
 
         # make the two halves having equal length
         if len(h1) > len(h2):
-            h1 = h1[1:len(h1)]
+            h1 = h1[1:]
         if len(h2) > len(h1):
-            h2 = h2[1:len(h2)]
+            h2 = h2[1:]
 
         # print("h1:", h1)
         # print("h2:", h2[::-1])
@@ -109,8 +109,7 @@ class Solution():
 
 
     def generate_next_element(self, histogram: list[int]) -> int:
-        for i in histogram:
-            yield i
+        yield from histogram
 
                 
     def largestTriagle(self, histogram: list[int]) -> int:

@@ -63,14 +63,18 @@ def main():
     nums = [1, 2, 3, 4, 5]
     target = 6
     print("Test 1:")
-    print("Given array: '{}' and target: '{}'".format(nums, target))
-    print("Unique combination of numbers whose sum equals '{}' is \n{}".format(target, Solution().combinationSum(nums, target)))
-    
+    print(f"Given array: '{nums}' and target: '{target}'")
+    print(
+        f"Unique combination of numbers whose sum equals '{target}' is \n{Solution().combinationSum(nums, target)}"
+    )
+
     nums = [2,3,6,7]
     target = 7
     print("\nTest 2:")
-    print("Given array: '{}' and target: '{}'".format(nums, target))
-    print("Unique combination of numbers whose sum equals '{}' is \n{}".format(target, Solution().combinationSum(nums, target)))
+    print(f"Given array: '{nums}' and target: '{target}'")
+    print(
+        f"Unique combination of numbers whose sum equals '{target}' is \n{Solution().combinationSum(nums, target)}"
+    )
 
 if __name__ == "__main__":
     if os.environ.get('UNITTEST_ONLY') != TRUE:

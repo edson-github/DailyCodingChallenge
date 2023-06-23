@@ -44,10 +44,7 @@ class Enigma:
         return self.dictEncodedMsg
     
     def encodedValue(self, key):
-        if key in self.dictEncodedMsg:
-            return self.dictEncodedMsg[key]
-        else:
-            return ''
+        return self.dictEncodedMsg[key] if key in self.dictEncodedMsg else ''
                 
     
     def addElement(self, result_lst, tmp_lst):
@@ -61,24 +58,21 @@ class Enigma:
     def countDecoding(self):
         # remove leading zeros
         self.message = self.message.lstrip('0')   
-        
+
         tmp_lst = []
-        result_lst = []
-        
         # edge case:
         if len(self.message) == 0:
             raise ValueError("Empty message")
-            
+
 
         # slpit message string into list of charaters
         msgKey = list(self.message)
-    
+
         #
         # Base case: each element is individually matched with the dictionary
         #
         [tmp_lst.append(self.encodedValue(''.join(msgKey[idx]))) for idx in range(0, len(msgKey))]
-        result_lst.append(''.join(tmp_lst))
-        
+        result_lst = [''.join(tmp_lst)]
         #
         # Iterable case: 1st element is matched with the dictionary, 
         # 2nd concat 3rd element is matched with the dictionary, 
@@ -95,7 +89,7 @@ class Enigma:
             result_lst.append(''.join(tmp_lst))
 
         tmp_lst = []
-        
+
         # Flip the list of characters in msgKey
         msgKey = msgKey[::-1]
         for i in range(0, len(msgKey)):
@@ -108,14 +102,14 @@ class Enigma:
             result_lst.append(''.join(tmp_lst)) 
 
 
-            
+
 
         # remove duplicates
         result_lst = list(set(result_lst))
-        
+
         # remove elements with length 1
         final_result = [i for i in result_lst if len(i) >= 2]    
-        
+
         print(final_result)
         return len(final_result)
 

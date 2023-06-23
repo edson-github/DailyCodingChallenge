@@ -45,12 +45,10 @@ def search_up_to_down(Matrix, target):
 	rows = len(Matrix)
 	cols = len(Matrix[0])
 	for c in range(cols):
-		word = ""
-		for r in Matrix:
-			word += r[c]
+		word = "".join(r[c] for r in Matrix)
 		#print("DBUG-- word:{} target:{}".format(word, target))
 		if word.upper() == target.upper():
-			print("Result: \'{}\' is found in column {}".format(word, c))
+			print(f"Result: \'{word}\' is found in column {c}")
 			return True
 	return False
 
@@ -60,12 +58,12 @@ def search_up_to_down(Matrix, target):
 #
 def search_right_to_left(Matrix, target):
 	rows = len(Matrix)
-	words = ""	
+	words = ""
 	for i in range(rows):
 		word = ''.join(Matrix[i])
 		#print("DBUG-- word:{} target:{}".format(word, target))
 		if word.upper() == target.upper():
-			print("Result: \'{}\' is found in row {}".format(word, i))
+			print(f"Result: \'{word}\' is found in row {i}")
 			return True
 	return False
 
@@ -85,15 +83,13 @@ def matchWordInMatrix(Matrix, target):
 		# go right-to-left
 		elif search_right_to_left(Matrix, target):
 			return True
-	else:
-		# go right-to-left first
-		if search_right_to_left(Matrix, target):
-			return True
-		elif search_up_to_down(Matrix, target):
-			return True
+	elif search_right_to_left(Matrix, target):
+		return True
+	elif search_up_to_down(Matrix, target):
+		return True
 
-	
-	print("Result: \'{}\' is not found.".format(target))
+
+	print(f"Result: \'{target}\' is not found.")
 	return False
 
 
@@ -125,27 +121,24 @@ def findWordinMatrix(Matrix, target):
 	# go up-to-down
 	words_in_cols = []
 	for c in range(cols):
-		word = ""
-		for r in Matrix:
-			word += r[c]
-
+		word = "".join(r[c] for r in Matrix)
 		words_in_cols.append(word)
 
-	print("DBUG--words_in_cols: {}".format(words_in_cols))
+	print(f"DBUG--words_in_cols: {words_in_cols}")
 	if target in words_in_cols:
-		print("Result: \'{}\' is found in column {}".format(target, words_in_cols.index(target))) 
+		print(f"Result: \'{target}\' is found in column {words_in_cols.index(target)}")
 		return True
 
 	# go left-to-right
-	words_in_rows = []	
+	words_in_rows = []
 	for i in range(rows):
 		word = ''.join(Matrix[i])
-		words_in_rows.append(word)	
-	print("DBUG--words_in_rows: {}".format(words_in_rows))
+		words_in_rows.append(word)
+	print(f"DBUG--words_in_rows: {words_in_rows}")
 	if target in words_in_rows:
-		print("Result: \'{}\' is found in row {}".format(target, words_in_rows.index(target))) 
+		print(f"Result: \'{target}\' is found in row {words_in_rows.index(target)}")
 		return True
-	
+
 	return False
 		
 
@@ -172,35 +165,39 @@ def main():
 	print("=== Validation tests ===")
 	Matrix = [['m','a','r','k'],['s','h','a','e'],['j','a','n','e']]
 	target = "mark"
-	print("Test1:\nGiven 2D matrix: {}\nTarget word: \'{}\'".format(Matrix, target))
+	print(f"Test1:\nGiven 2D matrix: {Matrix}\nTarget word: \'{target}\'")
 	matchWordInMatrix(Matrix, target)
 
 	target = "jane"
-	print("\nTest2:\nGiven 2D matrix: {}\nTarget word: \'{}\'".format(Matrix, target))
+	print(f"\nTest2:\nGiven 2D matrix: {Matrix}\nTarget word: \'{target}\'")
 	matchWordInMatrix(Matrix, target)
 
 	target = "polk"
-	print("\nTest3:\nGiven 2D matrix: {}\nTarget word: \'{}\'".format(Matrix, target))
+	print(f"\nTest3:\nGiven 2D matrix: {Matrix}\nTarget word: \'{target}\'")
 	matchWordInMatrix(Matrix, target)
 	target = "kee"
-	print("\nTest4:\nGiven 2D matrix: {}\nTarget word: \'{}\'".format(Matrix, target))
+	print(f"\nTest4:\nGiven 2D matrix: {Matrix}\nTarget word: \'{target}\'")
 	matchWordInMatrix(Matrix, target)
 
 	print("\n\n=== Timing tests ===")
-	
+
 	s_time = time.time()
 	Matrix = [['m','a','r','k'],['s','h','a','e'],['j','a','n','e'],['b','e','a','n'],['j','i','l','l'],['r','o','m','b']]
 	target = "romb"
 	findWordinMatrix(Matrix, target)
 	e_time = time.time()
 	ElapsedT1 = e_time - s_time
-	print("With (Solution2) findWordinMatrix(), Elapsed time:{} secs.".format(ElapsedT1*1000))
+	print(
+		f"With (Solution2) findWordinMatrix(), Elapsed time:{ElapsedT1 * 1000} secs."
+	)
 	s_time = time.time()
 	target = "romb"
 	matchWordInMatrix(Matrix, target)
 	e_time = time.time()
 	ElapsedT2 = e_time - s_time
-	print("With (Solution1) matchWordInMatrix(), Elapsed time:{} secs.\n\nConclusion:".format(ElapsedT2*1000))
+	print(
+		f"With (Solution1) matchWordInMatrix(), Elapsed time:{ElapsedT2 * 1000} secs.\n\nConclusion:"
+	)
 
 	if ElapsedT1 < ElapsedT2:
 		print("Solution2 \'findWordinMatrix()\' has better performance!")

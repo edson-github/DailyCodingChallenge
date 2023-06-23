@@ -32,49 +32,46 @@ import time
 def findFirstMissing(arr):
 	if len(arr) == 0:
 		return None
-	else:
-		# sort, remove duplicates
-		arr = list(set(arr))
-		# remove negative values from the array 	
-		arr = [n for n in arr if n > 0] 
+	# sort, remove duplicates
+	arr = list(set(arr))
+	# remove negative values from the array 	
+	arr = [n for n in arr if n > 0] 
 
-		# use list comprehesion to get the first missing number
-		# this yields a list instead of sing number. Hmmm...
-		missing = [arr[i-1]+1 for i, val in enumerate(arr) if val > arr[i-1]+1]
-		return missing[0]
+	# use list comprehesion to get the first missing number
+	# this yields a list instead of sing number. Hmmm...
+	missing = [arr[i-1]+1 for i, val in enumerate(arr) if val > arr[i-1]+1]
+	return missing[0]
 
 def firstMissingValA(arr):
 	if len(arr) == 0:
 		return None
-	else:
-		# sort, remove duplicates
-		arr = list(set(arr))
-		# remove negative values from the array 	
-		arr = [n for n in arr if n > 0] 
+	# sort, remove duplicates
+	arr = list(set(arr))
+	# remove negative values from the array 	
+	arr = [n for n in arr if n > 0] 
 
-		# use iterative loop
-		for i,n in enumerate(arr):
-			if (n > arr[i-1]+1):
-				missing = arr[i-1]+1
-				break
+	# use iterative loop
+	for i,n in enumerate(arr):
+		if (n > arr[i-1]+1):
+			missing = arr[i-1]+1
+			break
 	return missing
 
 def firstMissingValB(arr):
 	if len(arr) == 0:
 		return None
-	else:
-		# sort, remove duplicates
-		arr = list(set(arr))
-		# remove negative values from the array 	
-		arr = [n for n in arr if n > 0] 
+	# sort, remove duplicates
+	arr = list(set(arr))
+	# remove negative values from the array 	
+	arr = [n for n in arr if n > 0] 
 
-		# use ditionary to get to the missing number
-		dArr = { i+1 : arr[i] for i in range(0, len(arr) ) }
-		for k,v in dArr.items():
-			if k != v:
-				missing = k
-				#print("k:{} v:{}  missing:{}".format(k, v, missing))
-				break
+	# use ditionary to get to the missing number
+	dArr = { i+1 : arr[i] for i in range(0, len(arr) ) }
+	for k,v in dArr.items():
+		if k != v:
+			missing = k
+			#print("k:{} v:{}  missing:{}".format(k, v, missing))
+			break
 	return missing
 
 
@@ -84,23 +81,21 @@ unittest func written for pytest module  i.e. pytest codechalleng-04.py
 def test_code():
 	missing = 13
 	A = list(range(-20, missing))
-	A.append(missing+2)
-	A.append(missing+20)
+	A.extend((missing+2, missing+20))
+	starttime = time.time()
+	assert findFirstMissing(A) == missing
+	endtime = time.time()
+	print(f"Elasped time running firstFirstMissing() is {endtime - starttime}")
 
 	starttime = time.time()
-	assert findFirstMissing(A) == missing 
+	assert firstMissingValA(A) == missing
 	endtime = time.time()
-	print("Elasped time running firstFirstMissing() is {}".format(endtime - starttime))
+	print(f"Elasped time running firstMissingValA() is {endtime - starttime}")
 
 	starttime = time.time()
-	assert firstMissingValA(A) == missing 
+	assert firstMissingValB(A) == missing
 	endtime = time.time()
-	print("Elasped time running firstMissingValA() is {}".format(endtime - starttime))
-
-	starttime = time.time()
-	assert firstMissingValB(A) == missing 
-	endtime = time.time()
-	print("Elasped time running firstMissingValB() is {}".format(endtime - starttime))
+	print(f"Elasped time running firstMissingValB() is {endtime - starttime}")
 
 
 '''

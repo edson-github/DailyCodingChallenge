@@ -74,26 +74,16 @@ T = False   # you shall not pass
 def isEndpointApproachable(DBoard, endpos):
     try:
         return DBoard[endpos[0]][endpos[1]]
-    except TypeError:
-        return False
-    except KeyError:
-        return False
-    except IndexError:
+    except (TypeError, KeyError, IndexError):
         return False
 
 #
 # check if specified row is not a complete wall    
 #
 def isPassableRow(DBoard, row):
-    passingcnt=0
-    for val in DBoard[row]:
-        if val == T:            #val==True
-            passingcnt+=1
+    passingcnt = sum(1 for val in DBoard[row] if val == T)
     #print("DBUG: cnt:{} len:{}".format(passingcnt, len(DBoard[row])))
-    if passingcnt == len(DBoard[row]):
-        return False
-    else:
-        return True 
+    return passingcnt != len(DBoard[row]) 
 
 
 #
@@ -103,17 +93,11 @@ def peekTwoVirticalSteps(Board, row, col, direction):
     one, two = False, False
     try: 
         one = Board[row+(1*direction)][col]
-    except KeyError:
-        pass
-    except IndexError:
-        pass
-    except TypeError:
+    except (KeyError, IndexError, TypeError):
         pass
     try: 
         two = Board[row+(2*direction)][col]
-    except KeyError:
-        pass
-    except IndexError:
+    except (KeyError, IndexError):
         pass
     except TypeError:
         pass
@@ -127,17 +111,11 @@ def peekTwoHorizontalSteps(Board, row, col, direction):
     one, two = False, False
     try: 
         one = Board[row][col+(1*direction)]
-    except KeyError:
-        pass
-    except IndexError:
-        pass
-    except TypeError:
+    except (KeyError, IndexError, TypeError):
         pass
     try: 
         two = Board[row][col+(2*direction)]
-    except KeyError:
-        pass
-    except IndexError:
+    except (KeyError, IndexError):
         pass
     except TypeError:
         pass
@@ -149,13 +127,12 @@ def peekTwoHorizontalSteps(Board, row, col, direction):
 # Let's walk the talk.
 #
 def gotoEndPoint(Board, startpos, endpos):
-    minSteps = 0
     # Convert matrix into hash table so we can catch KeyError, IndexError 
     # when traversing the dictionary
-    DBoard = dict()   # hash table for Board
+    DBoard = {}
     for i in range(len(Board[-1])):
         item = {i:Board[i]}
-        DBoard.update(item)
+        DBoard |= item
 
     rows = len(Board[:])
     cols = len(Board[-1])
@@ -163,8 +140,6 @@ def gotoEndPoint(Board, startpos, endpos):
     cur_col = startpos[1]
     end_row = endpos[0]
     end_col = endpos[1]
-    debug_path = ""   
-    virtical_direction = (-1 if (end_row - cur_row) < 0 else 1)
     horizontal_direction = (-1 if (end_col - cur_col) < 0 else 1)
 
     #print("DBUG: endpos is {}".format(DBoard[end_row][end_col]))
@@ -182,6 +157,9 @@ def gotoEndPoint(Board, startpos, endpos):
         print("Endpoint is in the wall.  Impassable!")
         return None
     else:
+        minSteps = 0
+        debug_path = ""
+        virtical_direction = (-1 if (end_row - cur_row) < 0 else 1)
         # let's go.  We know we can get to the endpos  
 
         # First, virtical moves:
@@ -194,28 +172,28 @@ def gotoEndPoint(Board, startpos, endpos):
             step_one, step_two = peekTwoVirticalSteps(DBoard, cur_row, cur_col, virtical_direction)
             #print("DBUG--Virtical Step_1:{} Step_2:{}".format(step_one, step_two))
             if step_one:
-                debug_path += " -> ({},{})".format(cur_row, cur_col)   
+                debug_path += f" -> ({cur_row},{cur_col})"
                 cur_row = cur_row + (1 * virtical_direction)
-                minSteps+=1 
+                minSteps+=1
             else:
                 side_step_one, side_step_two = peekTwoHorizontalSteps(DBoard, cur_row, cur_col, horizontal_direction)
                 if side_step_one:
-                    debug_path += " -> ({},{})".format(cur_row, cur_col)   
+                    debug_path += f" -> ({cur_row},{cur_col})"
                     cur_col = cur_col + (1 * horizontal_direction)
                     minSteps+=1 
 
         # Second, Horizontal moves
-        horizontal_direction = [-1 if (end_col - cur_col) < 0 else 1][0] 
+        horizontal_direction = [-1 if (end_col - cur_col) < 0 else 1][0]
         while True:
             # sentry goes here
             if cur_col == end_col:
-                debug_path += " -> ({},{})".format(cur_row, cur_col)   
+                debug_path += f" -> ({cur_row},{cur_col})"
                 break
 
             step_one, step_two = peekTwoHorizontalSteps(DBoard, cur_row, cur_col, horizontal_direction)
             #print("DBUG--Horizontal Step_1:{} Step_2:{}".format(step_one, step_two))
             if step_one:
-                debug_path += " -> ({},{})".format(cur_row, cur_col)   
+                debug_path += f" -> ({cur_row},{cur_col})"
                 cur_col = cur_col + (1 * horizontal_direction)
                 minSteps+=1 
 
@@ -242,15 +220,15 @@ if __name__ == '__main__':
     cols = len(Board[-1])
 
 
-    print("Start pos:{}".format(start))
-    print("End pos:{}".format(end))
+    print(f"Start pos:{start}")
+    print(f"End pos:{end}")
     print("Board layout:")
     for i in range(rows):
         for j in range(cols):
-            print("({}, {}):{}".format(i,j,Board[i][j]))
+            print(f"({i}, {j}):{Board[i][j]}")
 
     minSteps = gotoEndPoint(Board, start, end)
-    print("Minimum number of steps to reach the end position is {}".format(minSteps))
+    print(f"Minimum number of steps to reach the end position is {minSteps}")
 
 
 '''

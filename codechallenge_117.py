@@ -128,5 +128,5 @@ def main():
     print("\nBuilding a binary tree with Node library")
     buildBtreeWithNodeLib()
 
-if '__main__' == __name__:
-    main()
+if __name__ == '__main__':
+	main()

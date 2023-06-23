@@ -72,7 +72,10 @@ def reservedRooms(schedList):
 	return rooms
 
 def genRandomSchedule(slots):
-	sched = [(int(100*random.random()), int(100*random.random())) for i in range(slots)]
+	sched = [
+		(int(100 * random.random()), int(100 * random.random()))
+		for _ in range(slots)
+	]
 	sched.sort(reverse=False)
 	dsched = dict(sched)
 	dsched = {key:val+key for (key, val) in dsched.items()}
@@ -92,24 +95,24 @@ def test_code():
 	begin = time.time()
 	assert reservedRooms(schedtime) == 2
 	end = time.time()
-	print("Elapsed time: {}".format(end-begin))
+	print(f"Elapsed time: {end - begin}")
 
 if __name__ == "__main__":
 	# test base case given in the problem
 	schedtime = [(30, 75), (0, 50), (60, 150)]
-	print("Given a schedule: {}".format(schedtime))
+	print(f"Given a schedule: {schedtime}")
 	begin = time.time()
-	print ("Number of required room(s): {}".format(reservedRooms(schedtime)))
+	print(f"Number of required room(s): {reservedRooms(schedtime)}")
 	end = time.time()
-	print("Elapsed time: {}\n".format(end-begin))
+	print(f"Elapsed time: {end - begin}\n")
 
 	# test using random generator
 	schedtime = genRandomSchedule(5)
-	print("Random generated schedule: {}".format(schedtime))
+	print(f"Random generated schedule: {schedtime}")
 	begin = time.time()
-	print ("Number of required room(s): {}".format(reservedRooms(schedtime)))
+	print(f"Number of required room(s): {reservedRooms(schedtime)}")
 	end = time.time()
-	print("Elapsed time: {}\n".format(end-begin))
+	print(f"Elapsed time: {end - begin}\n")
 
 
 

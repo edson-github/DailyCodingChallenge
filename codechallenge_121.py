@@ -26,19 +26,10 @@ import requests, os, bs4  # bs4 is a beautiful soup library
 # address you search using your browser(even you clear the browsed data).  
 # You could open some one else'search history which is not cool snooping.
 def browse_map_address():
-    if len(sys.argv) > 1:
-        # get the address from the command line
-        # The sys.argv contains ['999', 'Commercial', 'St, ', 'Palo', 'Alto, ', 'CA', '94303']
-        # A foreign address: ['Thành', 'phố', 'Cà', 'Mau', 'Ca', 'Mau', 'Vietnam']
-        # A GPS coordinate: [8.691333, 104.905278]
-        address = ' '.join(sys.argv[1:])
-    else:
-        # get the address from the clipboard
-        address = pyperclip.paste()
-
+    address = ' '.join(sys.argv[1:]) if len(sys.argv) > 1 else pyperclip.paste()
     # open the browser if address has something in it
     if address:
-        webbrowser.open('https://www.google.com/maps/place/' + address)    
+        webbrowser.open(f'https://www.google.com/maps/place/{address}')    
         
 # ----------
 # Function: Download every single XKCD comic images
@@ -49,7 +40,7 @@ def web_download_img(url):
     # Downloads every single XKCD comic.
     while not url.endswith('#'):
         # Download the page.
-        print('Downloading page %s...' % url)
+        print(f'Downloading page {url}...')
         res = requests.get(url)
         res.raise_for_status()
 
@@ -63,21 +54,18 @@ def web_download_img(url):
         else:
             comicUrl = 'https:' + comicElem[0].get('src')
             # download the image
-            print('Downloading image %s...' % (comicUrl))
+            print(f'Downloading image {comicUrl}...')
             res = requests.get(comicUrl)
             try:
                 res.raise_for_status()
             except Exception as exc:
-                print('There was a problem: %s' % (exc))
+                print(f'There was a problem: {exc}')
                 break
-            
 
-            # Save the image to ./xkcd.
-            imageFile = open(os.path.join('xkcd', os.path.basename(comicUrl)), 'wb')
-            for chunk in res.iter_content(100000):
-                imageFile.write(chunk)
-            imageFile.close()
 
+            with open(os.path.join('xkcd', os.path.basename(comicUrl)), 'wb') as imageFile:
+                for chunk in res.iter_content(100000):
+                    imageFile.write(chunk)
             # Get the Prev button's url.
             prevLink = soup.select('a[rel="prev"]')[0]
             url = 'https://xkcd.com' + prevLink.get('href')

@@ -32,10 +32,7 @@ import HtmlTestRunner
 # names to counts (keyword args).
 #
 def are_anagrams(S1, S2):
-    if len(S1) != len(S2):
-        return False
-    # use Counter to count the frequency of each character in S1, and then compare it to the frequency of each character in S2
-    return Counter(S1) == Counter(S2)
+    return False if len(S1) != len(S2) else Counter(S1) == Counter(S2)
     
 
 #

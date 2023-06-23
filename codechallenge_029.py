@@ -94,8 +94,7 @@ class Stack:
 		try:
 			return max(self.items)
 		except:
-			raise ValueError("null data")
-			return None	
+			raise ValueError("null data")	
 
 	# return max value in O(n), N time	 
 	def mad_max(self):
@@ -106,8 +105,6 @@ class Stack:
 			max_val = next(iteritems) # assign the first value as the max value
 		except StopIteration:
 			raise ValueError("max() called with no value")
-			return None
-
 		for val in iteritems:
 			if val > max_val:
 				max_val = val
@@ -135,10 +132,7 @@ def test_stack():
 # generate a stack containing fibonacci sequence for testing
 #
 def fibon(n):
-	if n <= 1:
-		return n
-	else:
-		return fibon(n-1) + fibon(n-2)
+	return n if n <= 1 else fibon(n-1) + fibon(n-2)
 def gen_stack(n):
 	S = Stack()
 	for i in range(n):
@@ -156,37 +150,39 @@ def main():
 	lst = [9, 10, 23, 5]
 	[s.push(i) for i in lst] # push values in array lst onto the stack s
 
-	print("Test1:\nContent of the stack is {}".format(s.print_stack()))
+	print(f"Test1:\nContent of the stack is {s.print_stack()}")
 	s.pop()
-	print("After poping once, the content of the stack is {}".format(s.print_stack()))
-	print("The size of the stack is {}".format(s.size()))
-	print("The top element in the stack is {}".format(s.peek()))
-	print("Max value is {}".format(s.max()))
+	print(f"After poping once, the content of the stack is {s.print_stack()}")
+	print(f"The size of the stack is {s.size()}")
+	print(f"The top element in the stack is {s.peek()}")
+	print(f"Max value is {s.max()}")
 	s.pop()
 	lst = [99, 55, 1]
 	[s.push(i) for i in lst] # push values in array lst onto the stack s
 
-	print("\n\nTest2:\nContent of the stack now is {}".format(s.print_stack()))
+	print(f"\n\nTest2:\nContent of the stack now is {s.print_stack()}")
 	[s.pop() for _ in range(2)] # do two popings
 	lst = [1000, 231, 88]
 	[s.push(i) for i in lst] # push values in array lst onto the stack s
-	print("After poping twice, pushing thrice, the content of the stack is {}".format(s.print_stack()))
-	print("The size of the stack now is {}".format(s.size()))
-	print("The top element in the stack now is {}".format(s.peek()))
-	print("Max value now is {}".format(s.max()))
+	print(
+		f"After poping twice, pushing thrice, the content of the stack is {s.print_stack()}"
+	)
+	print(f"The size of the stack now is {s.size()}")
+	print(f"The top element in the stack now is {s.peek()}")
+	print(f"Max value now is {s.max()}")
 
 	# timing test between constant time max() and variable time mad_max() 
 	s = gen_stack(15)
-	print("\nTest3:(run-time test)\nContent of the stack is {}".format(s.print_stack()))
+	print(f"\nTest3:(run-time test)\nContent of the stack is {s.print_stack()}")
 	s_time = time.time()
-	print("Using max() method, max value is {}".format(s.max()))
+	print(f"Using max() method, max value is {s.max()}")
 	e_time = time.time()
-	print("Elapsed time is {} secs".format((e_time - s_time)*1000))
+	print(f"Elapsed time is {(e_time - s_time) * 1000} secs")
 
 	s_time = time.time()
-	print("\nUsing mad_max() method, max value is {}".format(s.mad_max()))
+	print(f"\nUsing mad_max() method, max value is {s.mad_max()}")
 	e_time = time.time()
-	print("Elapsed time is {} secs".format((e_time - s_time)*1000))
+	print(f"Elapsed time is {(e_time - s_time) * 1000} secs")
 
 
 

@@ -34,9 +34,9 @@ def test_code():
 
 if __name__ == '__main__':
 	A = ['G', 'B', 'R', 'R', 'B', 'R', 'G']
-	print("Test1\nInput: {}".format(A))
-	print("Output: {}".format(segListOfRGB(A)))
-	
+	print(f"Test1\nInput: {A}")
+	print(f"Output: {segListOfRGB(A)}")
+		
 
 '''
 Run-time output:

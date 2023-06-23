@@ -38,18 +38,16 @@ def check_sentence(stream):
         return False
     # Traverse the stream and check for the followings:
     for i,c in enumerate(list(stream)):
-        # is first c a capital letter?
         if i == 0:
             continue
-        else: # i > 0
-            if c.isspace():
-                if (list(stream)[i+1].isspace()):
-                    return False
-            
-            elif (c.isalnum() and c.islower()) or (c in [',',';',':','.']):
-                continue
-            else:
+        if c.isspace():
+            if (list(stream)[i+1].isspace()):
                 return False
+
+        elif (c.isalnum() and c.islower()) or (c in [',',';',':','.']):
+            continue
+        else:
+            return False
     print(stream)
     return True
 

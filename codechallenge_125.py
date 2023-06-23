@@ -11,31 +11,24 @@ class Solution:
    
     def sumOfNumbers(self, nums: list[int]) -> int:
         def listSum(nums):
-            if len(nums) == 1:
-                return nums[0]
-            else:
-                return nums[0] + listSum(nums[1:])        
-            
+            return nums[0] if len(nums) == 1 else nums[0] + listSum(nums[1:])
+
         # call the helper function
         return listSum(nums)
     
         
     def productOfNumbers(self, nums: list[int]) -> int:
         def listProduct(nums):
-            if len(nums) == 1:
-                return nums[0]
-            else:
-                return nums[0] * listProduct(nums[1:])
+            return nums[0] if len(nums) == 1 else nums[0] * listProduct(nums[1:])
+
         # call the helper function
         return listProduct(nums)
 
-    @staticmethod 
+    @staticmethod
     def fnc(self, nums: list[int]) -> int:
         def listSum(nums):
-            if len(nums) == 1:
-                return nums[0]
-            else:
-                return nums[0] + listSum(nums[1:])
+            return nums[0] if len(nums) == 1 else nums[0] + listSum(nums[1:])
+
         # call the helper function
         return listSum(nums)
     
@@ -49,18 +42,20 @@ class Solution:
 def main():
     nums = [1, 2, 3, 4, 5]
     print("Test 1:")
-    print("Given array: '{}'".format(nums))
-    print("Sum of numbers in the array is {}".format(Solution().sumOfNumbers(nums)))
+    print(f"Given array: '{nums}'")
+    print(f"Sum of numbers in the array is {Solution().sumOfNumbers(nums)}")
 
     nums = [1, 2, 3, 4, 5]
     print("Test 2:")
-    print("Given array: '{}'".format(nums))
-    print("Product of numbers in the array is {}".format(Solution().productOfNumbers(nums)))
+    print(f"Given array: '{nums}'")
+    print(
+        f"Product of numbers in the array is {Solution().productOfNumbers(nums)}"
+    )
 
     nums = [1, 2, 3, 4, 5]
     print("Test 3:")
-    print("Given array: '{}'".format(nums))
-    print("Sum of numbers in the array is {}".format(Solution.fnc(Solution, nums)))
+    print(f"Given array: '{nums}'")
+    print(f"Sum of numbers in the array is {Solution.fnc(Solution, nums)}")
 
     # nums = [1, 2, 3, 4, 5]
     # print("Test 4:")

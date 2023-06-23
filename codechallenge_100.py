@@ -33,10 +33,7 @@ def findNumberSequentialSearch(arr, k):
         return 'NO'
 
     arr.sort()
-    for i in range(len(arr)):
-        if arr[i] == k:
-            return 'YES'
-    return 'NO'
+    return next(('YES' for i in range(len(arr)) if arr[i] == k), 'NO')
 
 
 # Shorthand Algorithm: O(n)
@@ -69,24 +66,24 @@ if __name__ == '__main__':
     if os.environ['UNITTEST_ONLY'] != 'True':
         arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
         k = 6
-        print("\nTest#1: arr={}, k={}".format(arr, k))
+        print(f"\nTest#1: arr={arr}, k={k}")
         shorthandFindNumber(arr, k)
         arr = []
         k = 10
-        print("\nTest#2: arr={}, k={}".format(arr, k))
+        print(f"\nTest#2: arr={arr}, k={k}")
         shorthandFindNumber(arr, k)
         arr = [21, 12, 73, 34, 85, 16, 97, 58, 29, 10]
         k = '0x10'
-        print("\nTest#3: arr={}, k={}".format(arr, k))
+        print(f"\nTest#3: arr={arr}, k={k}")
         findNumberSequentialSearch(arr, k)
         k = 29
-        print("\nTest#4: arr={}, k={}".format(arr, k))
+        print(f"\nTest#4: arr={arr}, k={k}")
         findNumberSequentialSearch(arr, k)
     else:
         # read the htlm output path from environment variable. e.g. local .env file.
         html_report_path = os.environ['HTML_REPORT_PATH']
         testRunner=HtmlTestRunner.HTMLTestRunner(output=html_report_path, report_title='Test Report for codechallenge_100.py')
-        
+
         test_suite = unittest.TestSuite()
         unittest.TextTestRunner(verbosity=0).run(test_suite)
         all_test = unittest.makeSuite(TestFindNumber)

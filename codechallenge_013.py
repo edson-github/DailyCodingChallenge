@@ -27,28 +27,23 @@ Pseudo code:
 
 import re
 def encode(instr):
-	encoded_str = ""
 	if len(instr) == 0:
 		return None
-	else:
-		# given instr="AAAABBOORRWMSSS"
-		# list comprehension [match[1] + match[0] for match in re.findall(r'(.)(\1*)', instr)]
-		# should produce a list: ['AAA'+'A', 'B'+'B', 'O'+'O', 'R'+'R', 'W'+'', 'M'+'', 'SS'+'S']
-		# which is ['AAAA', 'BB', 'OO', 'RR', 'W', 'M', 'SSS']
+	# given instr="AAAABBOORRWMSSS"
+	# list comprehension [match[1] + match[0] for match in re.findall(r'(.)(\1*)', instr)]
+	# should produce a list: ['AAA'+'A', 'B'+'B', 'O'+'O', 'R'+'R', 'W'+'', 'M'+'', 'SS'+'S']
+	# which is ['AAAA', 'BB', 'OO', 'RR', 'W', 'M', 'SSS']
 
-		matches = [match[1] + match[0] for match in re.findall(r'(.)(\1*)', instr)]
-		for i, s in enumerate(matches):
-			encoded_str += str(len(s))+s[0]
-	return encoded_str
+	matches = [match[1] + match[0] for match in re.findall(r'(.)(\1*)', instr)]
+	return "".join(str(len(s))+s[0] for s in matches)
 
 def decode(instr):
-	decoded_str = ""
 	if len(instr) == 0:
 		return None
-	else:
-		for i in range(0, len(instr), 2):
-			decoded_str += ''.join([str(instr[i+1]) for x in range(int(instr[i]))])
-	return decoded_str
+	return "".join(
+		''.join([str(instr[i + 1]) for _ in range(int(instr[i]))])
+		for i in range(0, len(instr), 2)
+	)
 
 def test_code():
 	S="AAAABBOORRWMSSS"
@@ -65,7 +60,9 @@ def test_code():
 
 if __name__ == "__main__":	
 	STR = "99999000022222AAAA888FFTTPPPQQQSSSVVVZZZZZZZ"
-	print("Text: {}\nEncode text: {}\nDecoded text: {}".format(STR, encode(STR), decode(encode(STR))))
+	print(
+		f"Text: {STR}\nEncode text: {encode(STR)}\nDecoded text: {decode(encode(STR))}"
+	)
 
 
 '''

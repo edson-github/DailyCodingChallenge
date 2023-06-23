@@ -86,7 +86,7 @@ def test_searchindex():
 	assert get_index(Arr, elem) == 2
 	Arr = []
 	elem = 100000
-	assert get_index(Arr, elem) == None
+	assert get_index(Arr, elem) is None
 
 #
 # client program
@@ -94,14 +94,20 @@ def test_searchindex():
 def main():
 	Arr = [21,23,25,5,6,10,13,17,20]
 	elem = 13
-	print("\nTest 1:\nGiven an array [{}]\nThe index of element {} is {}".format(', '.join(str(i) for i in Arr), elem, get_index(Arr, elem)))
+	print(
+		f"\nTest 1:\nGiven an array [{', '.join(str(i) for i in Arr)}]\nThe index of element {elem} is {get_index(Arr, elem)}"
+	)
 
 	Arr = [21,23,25,88,103,1000,-900,0,3,4,5,6,10,13,17,20]
 	elem = 1000
-	print("\nTest 2:\nGiven an array [{}]\nThe index of element {} is {}".format(', '.join(str(i) for i in Arr), elem, get_index(Arr, elem)))
+	print(
+		f"\nTest 2:\nGiven an array [{', '.join(str(i) for i in Arr)}]\nThe index of element {elem} is {get_index(Arr, elem)}"
+	)
 	Arr = []
 	elem = 1000
-	print("\nTest 3:\nGiven an array [{}]\nThe index of element {} is {}".format(', '.join(str(i) for i in Arr), elem, get_index(Arr, elem)))
+	print(
+		f"\nTest 3:\nGiven an array [{', '.join(str(i) for i in Arr)}]\nThe index of element {elem} is {get_index(Arr, elem)}"
+	)
 
 if __name__ == '__main__':
 	main()

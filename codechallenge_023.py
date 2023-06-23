@@ -54,14 +54,14 @@ the most number of queens on the given square NxN board.
 
 from __future__ import print_function
 def place_queens(N): 
-	queens = list()
+	queens = []
 
 	# bottom half of the board
 	cur_col = N-2
 	for row in range(N//2):
 		if cur_col >= 0:
 			queens.append((row, cur_col))
-			print("(bottom_half)-- row,col:({}, {})".format(row,cur_col))
+			print(f"(bottom_half)-- row,col:({row}, {cur_col})")
 		cur_col = cur_col - 2	
 
 	# top half of the board
@@ -69,11 +69,11 @@ def place_queens(N):
 	for row in range(N//2, N, 1):
 		if cur_col >= 0:
 			queens.append((row,cur_col))
-			print("(top_half)-- row,col:({}, {})".format(row,cur_col))
+			print(f"(top_half)-- row,col:({row}, {cur_col})")
 		cur_col = cur_col - 2	
 
 	Qs = ', '.join(str(q) for q in queens)
-	print("Queen_positions = [{}]".format(Qs))
+	print(f"Queen_positions = [{Qs}]")
 	return len(queens) 
 
 def test_code():
@@ -82,9 +82,9 @@ def test_code():
 
 if __name__ == '__main__':
 	N=15
-	print("For a {}-by-{} board, we can place queens as follow:".format(N,N))
+	print(f"For a {N}-by-{N} board, we can place queens as follow:")
 	number_of_queens = place_queens(N)
-	print("Total number of queens:{}".format(number_of_queens))
+	print(f"Total number of queens:{number_of_queens}")
 
 
 

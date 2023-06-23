@@ -24,14 +24,14 @@ def get_all_file_paths(directory):
 	return file_paths		
 
 def un_zipFiles(path):
-    files=os.listdir(path)
-    for file in files:
-        if file.endswith('.zip'):
-            filePath=path+'/'+file
-            zip_file = ZipFile(filePath)
-            for names in zip_file.namelist():
-                zip_file.extract(names,path)
-            zip_file.close() 
+	files=os.listdir(path)
+	for file in files:
+		if file.endswith('.zip'):
+			filePath = f'{path}/{file}'
+			zip_file = ZipFile(filePath)
+			for names in zip_file.namelist():
+			    zip_file.extract(names,path)
+			zip_file.close() 
 
 def remove_files(path):
     # remove directory contents

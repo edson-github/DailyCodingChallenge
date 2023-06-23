@@ -52,10 +52,10 @@ def init_board(rows, cols):
 # print board layout
 #
 def print_board(Board, tick_count):
-    print("Board layout at tick count: {}.".format(tick_count))
+    print(f"Board layout at tick count: {tick_count}.")
     for i in range(len(Board)):
         for j in range(len(Board[i])):
-            print(" {} ".format(Board[i][j]), end='|') 
+            print(f" {Board[i][j]} ", end='|')
         print("\n")
 
 
@@ -115,10 +115,9 @@ def board_gen(*args):
                         Board[i][j] = '.'
                     #Any live cell with 2 or 3 live neighbors remains alive.  
                     #Ahh, but we don't even need to check it here
-                    if life_count == 3 or life_count == 2:
+                    if life_count in [3, 2]:
                         Board[i][j] = '*'
 
-                #Any dead cell with exactly three live neighbours becomes a live cell.
                 elif Board[i][j] == '.' and life_count == 3:
                     Board[i][j] = '*'
 
@@ -137,12 +136,14 @@ def determine_mortality(rows=5, cols=5, ticks=5):
         ticks = int(ticks)
     except:
         rows = cols = ticks = 5
-	
+
     if rows <= 0 or cols <= 0 or ticks < 0:
         print("Invalid input.  Please provide rows, coloumns and number of iterations")
 
     iterB = board_gen(rows,cols,ticks)
-    print("Test1:\nGiven board with dimension of {} by {}, and number of ticks: {}.".format(rows, cols, ticks))
+    print(
+        f"Test1:\nGiven board with dimension of {rows} by {cols}, and number of ticks: {ticks}."
+    )
     for i,board in enumerate(iterB):
         print_board(board,i)
 
@@ -152,12 +153,22 @@ def determine_mortality(rows=5, cols=5, ticks=5):
 def neighbor_life_sign_test():
     Board = init_board(6,6)
 	# test edge cases (four corners of the board)
-    print("neighbor's lifesign count at (0,0) is {}".format(neighbor_life_signs(Board, 0,0)))
-    print("neighbor's lifesign count at (5,5) is {}".format(neighbor_life_signs(Board, 5,5)))
-    print("neighbor's lifesign count at (0,5) is {}".format(neighbor_life_signs(Board, 0,5)))
-    print("neighbor's lifesign count at (5,0) is {}".format(neighbor_life_signs(Board, 5,0)))
+    print(
+        f"neighbor's lifesign count at (0,0) is {neighbor_life_signs(Board, 0, 0)}"
+    )
+    print(
+        f"neighbor's lifesign count at (5,5) is {neighbor_life_signs(Board, 5, 5)}"
+    )
+    print(
+        f"neighbor's lifesign count at (0,5) is {neighbor_life_signs(Board, 0, 5)}"
+    )
+    print(
+        f"neighbor's lifesign count at (5,0) is {neighbor_life_signs(Board, 5, 0)}"
+    )
 	# and an arbitrary point
-    print("neighbor's lifesign count at (2,2) is {}".format(neighbor_life_signs(Board, 2,2)))
+    print(
+        f"neighbor's lifesign count at (2,2) is {neighbor_life_signs(Board, 2, 2)}"
+    )
 
 
 

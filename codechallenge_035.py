@@ -97,8 +97,6 @@ def parse_assemble_str(mystr):
             sub_str += str(char)
             sub_str += ','
             s_cnt += 1
-        if char.ispace:
-            pass
         if char.isalpha():
             ops_str += str(char) + symbols[o_cnt]
     sub_str

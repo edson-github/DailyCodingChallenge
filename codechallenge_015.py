@@ -91,15 +91,10 @@ def deleteLastKthNode(head, k):
             # found a match, let's see if there is more
             moreKNode = isMoreKnode(currNode, k)
             if moreKNode == False:
-                #print("isMoreKnode:{}".format(moreKNode))
-
-                # let's delete the last kth node
                 if prevNode is None:
-                    newHead = currNode.next
-                    return newHead
-                else:
-                    prevNode.next = currNode.next
-                    return head
+                    return currNode.next
+                prevNode.next = currNode.next
+                return head
 
         # progressing toward end of list 
         prevNode = currNode
@@ -118,9 +113,9 @@ if __name__ == '__main__':
     insertNode(node,7)
     k=4
     print("Test#1")
-    print("Original linked list: ", end='') 
+    print("Original linked list: ", end='')
     printNode(node)
-    print("Deleting the last node having value: {}".format(k))
+    print(f"Deleting the last node having value: {k}")
     deleteLastKthNode(node,k)
     print("Resulting linked list: ", end='')
     printNode(node)
@@ -128,13 +123,13 @@ if __name__ == '__main__':
     k = 100
     nodeX = linkedlistNode(10)
     insertNode(nodeX, k)
-    [insertNode(nodeX, int(10*random.random())) for i in range(15)]
+    [insertNode(nodeX, int(10*random.random())) for _ in range(15)]
     insertNode(nodeX, k)
     insertNode(nodeX, k+1)
     print("Test#2")
-    print("Original linked list: ", end='') 
+    print("Original linked list: ", end='')
     printNode(nodeX)
-    print("Deleting the last node having value: {}".format(k))
+    print(f"Deleting the last node having value: {k}")
     deleteLastKthNode(nodeX, k)
     print("Resulting linked list: ", end='')
     printNode(nodeX)
